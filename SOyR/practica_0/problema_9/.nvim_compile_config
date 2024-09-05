@@ -1,0 +1,10 @@
+# compile, run code and show data
+rm -rf datos.csv && clear && make && ./build/main.o && cat datos.csv
+# compile, run code
+rm -rf datos.csv && clear && make && ./build/main.o
+# just compile
+make
+# clear the code
+make clear
+# Open in libre office
+xdg-open ./datos.csv & disown

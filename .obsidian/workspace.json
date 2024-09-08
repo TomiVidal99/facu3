@@ -13,11 +13,30 @@
             "state": {
               "type": "pdf",
               "state": {
-                "file": "Control 3/TP 0/CA3_TA0.pdf"
+                "file": "Control 3/TP 1/CA3_TP1.pdf",
+                "page": 3,
+                "left": -3,
+                "top": 754,
+                "zoom": 1.5
+              }
+            }
+          },
+          {
+            "id": "d619bbd5b16f47d4",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "CE2/TP2/amplificadores de gran señal filminaspdf.pdf",
+                "page": 1,
+                "left": -78,
+                "top": 544,
+                "zoom": 1.011111111111111
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -67,7 +86,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "f25433d372ea52d4",
@@ -83,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Control 3/TP 0/CA3_TA0.pdf",
+                "file": "CE2/TP2/amplificadores de gran señal filminaspdf.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Control 3/TP 0/CA3_TA0.pdf",
+                "file": "CE2/TP2/amplificadores de gran señal filminaspdf.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -123,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Control 3/TP 0/CA3_TA0.pdf"
+                "file": "CE2/TP2/amplificadores de gran señal filminaspdf.pdf"
               }
             }
           }
@@ -136,6 +156,10 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "obsidian-excalidraw-plugin:Create new drawing": false,
+      "pdf-plus:PDF++: Toggle auto-copy": false,
+      "pdf-plus:PDF++: Toggle auto-focus": false,
+      "pdf-plus:PDF++: Toggle auto-paste": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -144,18 +168,18 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "bc2fefc1202efcc6",
+  "active": "d619bbd5b16f47d4",
   "lastOpenFiles": [
-    "SOyR/practica_0/problema_9/src/main.c",
-    "SOyR/practica_0/problema_9/build/main.o",
-    "SOyR/practica_0/problema_9/src",
-    "SOyR/practica_0/problema_9/Makefile",
-    "SOyR/practica_0/problema_9/datos.csv",
-    "SOyR/practica_0/problema_9/datos.bin",
-    "SOyR/practica_0/problema_9/build",
-    "SOyR/practica_0/Práctica 0.pdf",
-    "SOyR/practica_0/problema_9",
-    "SOyR/practica_0/pepe.dat",
-    "SOyR/practica_0/leerdatos.c"
+    "Control 3/TP 2/CA3_TP2.pdf",
+    "CE2/TP1/reguladores para alimentacion de cc.pdf",
+    "CE2/TP1/fuentes reguladas de cc.pdf",
+    "CE2/TP1/FUENTES DE CC NO-REGULADAS_240823_1255.pdf",
+    "CE2/TP2/amplificadores de gran señal filminaspdf.pdf",
+    "CE2/TP2",
+    "CE2/Nueva carpeta",
+    "CE2/TP1",
+    "CE2",
+    "Control 3/TP 1/CA3_TP1.pdf",
+    "Control 3/TP 0/CA3_TA0.pdf"
   ]
 }

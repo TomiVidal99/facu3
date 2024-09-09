@@ -13,30 +13,15 @@
             "state": {
               "type": "pdf",
               "state": {
-                "file": "Fundamentos/TP 1/TP1_2024.pdf",
+                "file": "CE2/TP1/FUENTES DE CC NO-REGULADAS_240823_1255.pdf",
                 "page": 1,
-                "left": -77,
-                "top": 748,
-                "zoom": 1.7
-              }
-            }
-          },
-          {
-            "id": "ebf930707063a093",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "Fundamentos/TP 1/FdCom_Com_2208_27082024.pdf",
-                "page": 19,
-                "left": -82,
-                "top": 543,
+                "left": -103,
+                "top": 4,
                 "zoom": 1.1305555555555555
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -86,8 +71,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "f25433d372ea52d4",
@@ -103,7 +87,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Fundamentos/TP 1/FdCom_Com_2208_27082024.pdf",
+                "file": "CE2/TP1/FUENTES DE CC NO-REGULADAS_240823_1255.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +104,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Fundamentos/TP 1/FdCom_Com_2208_27082024.pdf",
+                "file": "CE2/TP1/FUENTES DE CC NO-REGULADAS_240823_1255.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +127,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Fundamentos/TP 1/FdCom_Com_2208_27082024.pdf"
+                "file": "CE2/TP1/FUENTES DE CC NO-REGULADAS_240823_1255.pdf"
               }
             }
           }
@@ -168,18 +152,18 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "ebf930707063a093",
+  "active": "a99c44494da30acb",
   "lastOpenFiles": [
-    "SOyR/practica_1/Práctica 1.pdf",
-    "SOyR/practica_1",
-    "CE2/TP2/amplificadores de gran señal filminaspdf.pdf",
-    "CE2/TP2",
-    "CE2/TP1/reguladores para alimentacion de cc.pdf",
+    "CE2/TP3/TP3-AmplisintoPS.pdf",
+    "CE2/TP3",
+    "CE2/New folder",
+    "CE2/TP2/TP2-AmpliaudioGS.pdf",
+    "CE2/TP2/TP2-2-AmpliaudioGS con bootstrapping.pdf",
+    "CE2/TP1/TP1.2-FuentesCCregu-230825_1306.pdf",
+    "CE2/TP1/TP1.1-FuentesCCnoregu-230818.pdf",
     "CE2/TP1/fuentes reguladas de cc.pdf",
+    "CE2/TP1/reguladores para alimentacion de cc.pdf",
     "CE2/TP1/FUENTES DE CC NO-REGULADAS_240823_1255.pdf",
-    "CE2/TP1",
-    "CE2",
-    "Fundamentos/TP 1/FdCom_Com_29082024.pdf",
     "Fundamentos/TP 1/TP1_2024.pdf"
   ]
 }

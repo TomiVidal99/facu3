@@ -78,6 +78,6 @@ semilogx(ww, cond_perf_robust);
 T_closed_loop = L0 / (1 + L0);
 figure; hold on;
 step(T_closed_loop); grid on;
-title('Respuesta al escalón lazo cerrado');
+title('Respuesta al escalon lazo cerrado');
 
 % - - - - - - - - - - - - - - - - - - - - 

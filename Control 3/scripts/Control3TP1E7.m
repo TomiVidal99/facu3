@@ -45,18 +45,21 @@ wRegionB = logspace(log10(w_zero_dB), log10(wf));
 % semilogx(w, 1/WdeltaMag_dB, 'y--', 'linewidth', 3);
 
 % Grafico mi controlador
-L0 = 1/((s/1+1)*(s/10+1)); % mi controlador propuesto
-[cMag, ~] = bode(L0, w); cMag = squeeze(cMag);
+L0 = 15/(s*(s/0.2+1)*(s/0.2+1)*(s/0.2+1)); % mi controlador propuesto
+K0 = L0/g0;
+[cMag, ~] = bode(K0, w); cMag = squeeze(cMag);
 cMag_dB = 20*log10(cMag);
 semilogx(w, cMag_dB, 'g', 'linewidth', 2);
 
-L0_poles = abs(pole(L0));
-for i = 1:length(L0_poles)
-    if (L0_poles(i) == 0)
+
+% Grafico los polos del controlador
+K0_poles = abs(pole(K0));
+for i = 1:length(K0_poles)
+    if (K0_poles(i) == 0)
         limits = xlim;
         plot(limits(1), 0, 'r*', 'linewidth', 5);
     else
-        plot(L0_poles(i), 0, 'r*', 'linewidth', 5);
+        plot(K0_poles(i), 0, 'r*', 'linewidth', 5);
     end
 end
 
@@ -69,18 +72,25 @@ ylabel('Magnitud (dB)');
 title('Loopshaping');
 % legend('W_{\delta} ', 'W_{d}', 'W_{\delta}', 'controlador', 'polo del controlador','polo del controlador',  'delimitadores', 'delimitadores');
 
+% Grafico la condicion de performance robusta para sistemas SISO
+% || |WdS| + |WdeltaT| || <= 1
+% en terminos de L -> | Wd(jw) / ( 1 + L(jw) ) | + | Wdelta(jw)*L(jw) / ( 1 + L(jw) ) |
+[L0Mag, ~] = bode(L0, w); L0Mag = squeeze(L0Mag);
+rjw = (Wd + WdeltaMag.*L0Mag)/(1 + L0Mag);
+figure(); grid on; hold on;
+plot(w, rjw, 'r', 'linewidth', 3);
+
 %% Grafico el controlador en el tiempo
 figure(); grid on; hold on;
-K0=L0/g0
-T0 = K0*g0/(1+g0*L0) % lazo cerrado para la planta nominal y el controlador
+T0 = K0*g0/(1+g0*K0) % lazo cerrado para la planta nominal y el controlador
 g0_delta = [-1:0.5:1]; % incerteza del modelo que da lugar a las familias de plantas
 [y_g0, stepTime] = step(T0, 50);
 grid on; hold on;
 plot(stepTime, y_g0, 'linewidth', 3);
 plot(stepTime, heaviside(stepTime), 'linewidth', 3);
 
-figure(); grid on;
-pzmap(T0);
+figure();
+pzmap(T0); grid on;
 
 % grafico la respuesta temporal para la familia
 % for i = 1:length(g0_delta)

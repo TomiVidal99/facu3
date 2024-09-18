@@ -29,7 +29,7 @@ wm_resp=freqresp(wm,ww);wm_resp=reshape(wm_resp,size(ww));
 % Controlador K = L0/G0
 L0 = 10;
 L0 = 10/(s);
-L0 = 10/((s+1)*(s/0.1+1));
+L0 = 15/((s+1)*(s+1)*(s/0.1+1));
 % L0 = K*G0;
 L0_resp=freqresp(L0,ww);L0_resp=reshape(L0_resp,size(ww));
 
@@ -42,15 +42,17 @@ S=1-T; % Sensibilidad
 % Performance nominal y estabilidad robusta
 % % % % % % % % % % % % % % % % % % % % 
 % regionTop=20*log10(real(wd_resp)); regA0dbIndex=find(regionA<=0,1);regionA=regionA(1:regA0dbIndex);
-regionA=20*log10(1./(1+abs(wd_resp)));
-regionB=20*log10(1./abs(wm_resp));
+regionA=20*log10((1+abs(wd_resp))./(1+abs(wm_resp)));
+regionB2=20*log10(1./abs(wm_resp));
+regionB=20*log10(1./(abs(wm_resp)+1));
 
 fig = figure(); hold on; grid on; screenSize = get(0, 'ScreenSize');
 set(fig, 'Position', [0 0 screenSize(3) screenSize(4)]);
 set(gca, 'XScale', 'log');  % hago el eje logaritmico
-semilogx(ww(1:length(wd_resp)), real(wd_resp), 'b--','linewidth',2);
+semilogx(ww(1:length(wd_resp)), real(wd_resp), 'm--','linewidth',2);
 semilogx(ww(1:length(regionA)), real(regionA), 'b--','linewidth',2);
 semilogx(ww(1:length(regionB)), real(regionB), 'r--','linewidth',2);
+semilogx(ww(1:length(regionB2)), real(regionB2), 'k--','linewidth',1);
 semilogx(ww(1:length(wm_resp)), real(wm_resp), 'r--','linewidth',2);
 semilogx(ww(1:length(abs(L0_resp))), real(20*log10(L0_resp)), 'g','linewidth',2);
 

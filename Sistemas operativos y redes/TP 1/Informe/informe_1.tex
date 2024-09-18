@@ -120,13 +120,13 @@ fill=green!30]
 \usepackage{amsmath} % assumes amsmath package installed
 %\usepackage{amssymb}  % assumes amsmath package installed
 
-\title{\LARGE \bf Trabajo Práctico N° 1}
+\title{\LARGE \bf Entregable Trabajo Práctico N° 1}
 
 \author{
   Tom\'as Vidal\\
   {\it Sistemas Operativos y Redes}\\
   {\it Facultad de Ingenier\'ia, UNLP, La Plata, Argentina.}\\
-  {\it 14 de Septiembre, 2024.}
+  {\it 17 de Septiembre, 2024.}
 }                                            % <-this % stops a space
 
 
@@ -161,10 +161,10 @@ Se debe es desarrollar una interfaz que permita al usuario almacenar datos de ma
 
 \subsection{Funcionalidades}
 \begin{itemize}
-  \item Agregar producto: Se espera que el usuario ingreso los datos correspondientes a un producto al archivo contenedor.
-  \item Listar productos: Se muestran todos los productos que hay en el archivo contenedor.
-  \item Buscar producto: Se espera que el usuario ingrese un nombre de producto, se muestran los datos del producto si existe.
-  \item Ordenar productos por precio: Se muestran todos los productos al usuario pero ordenados por precio, de mayor a menor.
+  \item \textit{Agregar producto:} Se espera que el usuario ingreso los datos correspondientes a un producto al archivo contenedor.
+  \item \textit{Listar productos:} Se muestran todos los productos que hay en el archivo contenedor.
+  \item \textit{Buscar producto:} Se espera que el usuario ingrese un nombre de producto, se muestran los datos del producto si existe.
+  \item \textit{Ordenar productos por precio:} Se muestran todos los productos al usuario pero ordenados por precio, de mayor a menor.
 \end{itemize}
 
 \section{Resolución}
@@ -176,13 +176,16 @@ Se resulve el problema empleando una serie de flujos de datos sobre un bucle pri
   \label{img:diag_flujo}
 \end{figure}
 
-\section{Codigo}
+\section{Código}
 Hay algunas partes del código que vale la pena mencionar y explicar en produndidad:
 \begin{itemize}
-  \item search\_product(): en esta función se busca un producto, para lo cual se empleó \textit{grep} con la \textit{flag} de ennumerar lineas (\textbf{n}), así se puede volver a iterar sobre los productos, y encontrar la línea con todos los datos correspondientes al encontrado.
-  \item add\_product(): en esta función se agrega un producto, cada dato correspondiente al mismo debe cumplir un cierto formato, por lo que se hacen buclen internos que permiten corroborar que se cumplen las condiciones. Para poder inferir las condiciones se emlea \textit{grep} con las flags que permiten el uso de expresiones regulares.
+  \item \textbf{search\_product():} en esta función se busca un producto, para lo cual se empleó \textit{grep} con la \textit{flag} de ennumerar lineas (\textbf{-n}), así se puede volver a iterar sobre los productos, y encontrar la línea con todos los datos correspondientes al encontrado.
+  \item \textbf{add\_product():} en esta función se agrega un producto, cada dato correspondiente al mismo debe cumplir un cierto formato, por lo que se hacen buclen internos que permiten corroborar que se cumplen las condiciones. Para poder inferir las condiciones se emlea \textit{grep} con las flags que permiten el uso de expresiones regulares.
+  \item \textbf{recursión del menu principal:} en vez de emplear un \textit{while} para mostrar el menu princial, se empleó recursión, haciendo que se llame a la función de generar el menu después de cada opción.
+  \item \textbf{empleo del less:} en general para mostrar los datos al usuario se hace uso de \textit{less}, facilitando e integrando el uso del programa. 
 \end{itemize}
 
-En general para mostrar los datos al usuario se hace uso de \textit{less}, facilitando e integrando el uso del programa.
+\section{Diagrama de flujo}
+El diagrama de flujo se presenta junto a este archivo en diferentes formatos, para la facilidad del lector.
 
 \end{document}

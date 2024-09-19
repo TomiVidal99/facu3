@@ -10,7 +10,6 @@ tags: [excalidraw]
 # Text Elements
 
 # Embedded files
-4b6aaba42c3166d24b1b1d9ff4a3f032c4cc4e94: [[Pasted Image 20240919111756_295.png]]
 9130f7272f7141399803aef32763a2bd2c7d888c: [[Pasted Image 20240919114525_688.png]]
 
 %%
@@ -21,39 +20,6 @@ tags: [excalidraw]
 	"version": 2,
 	"source": "https://github.com/zsviczian/obsidian-excalidraw-plugin/releases/tag/2.0.24",
 	"elements": [
-		{
-			"type": "image",
-			"version": 342,
-			"versionNonce": 2052118078,
-			"isDeleted": false,
-			"id": "qhHAIT0R9Mh00ZSUXL-0m",
-			"fillStyle": "solid",
-			"strokeWidth": 2,
-			"strokeStyle": "solid",
-			"roughness": 1,
-			"opacity": 100,
-			"angle": 0,
-			"x": -562.9626834080692,
-			"y": -197.68360137939453,
-			"strokeColor": "transparent",
-			"backgroundColor": "transparent",
-			"width": 734.789029535865,
-			"height": 435,
-			"seed": 1147131326,
-			"groupIds": [],
-			"frameId": null,
-			"roundness": null,
-			"boundElements": [],
-			"updated": 1726757681862,
-			"link": null,
-			"locked": false,
-			"status": "pending",
-			"fileId": "4b6aaba42c3166d24b1b1d9ff4a3f032c4cc4e94",
-			"scale": [
-				1,
-				1
-			]
-		},
 		{
 			"type": "freedraw",
 			"version": 218,
@@ -68729,6 +68695,39 @@ tags: [excalidraw]
 				0.01953125,
 				0
 			]
+		},
+		{
+			"type": "image",
+			"version": 343,
+			"versionNonce": 842911522,
+			"isDeleted": true,
+			"id": "qhHAIT0R9Mh00ZSUXL-0m",
+			"fillStyle": "solid",
+			"strokeWidth": 2,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"angle": 0,
+			"x": -562.9626834080692,
+			"y": -197.68360137939453,
+			"strokeColor": "transparent",
+			"backgroundColor": "transparent",
+			"width": 734.789029535865,
+			"height": 435,
+			"seed": 1147131326,
+			"groupIds": [],
+			"frameId": null,
+			"roundness": null,
+			"boundElements": [],
+			"updated": 1726757787605,
+			"link": null,
+			"locked": false,
+			"status": "pending",
+			"fileId": "4b6aaba42c3166d24b1b1d9ff4a3f032c4cc4e94",
+			"scale": [
+				1,
+				1
+			]
 		}
 	],
 	"appState": {
@@ -68746,10 +68745,10 @@ tags: [excalidraw]
 		"currentItemTextAlign": "left",
 		"currentItemStartArrowhead": null,
 		"currentItemEndArrowhead": "arrow",
-		"scrollX": 1646.96247323726,
-		"scrollY": 1128.4484417567096,
+		"scrollX": 3616.717517180722,
+		"scrollY": -237.87583477724547,
 		"zoom": {
-			"value": 0.4999999999999996
+			"value": 0.15000000000000002
 		},
 		"currentItemRoundness": "round",
 		"gridSize": null,

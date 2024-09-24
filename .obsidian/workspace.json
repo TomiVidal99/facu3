@@ -13,11 +13,11 @@
             "state": {
               "type": "pdf",
               "state": {
-                "file": "CE2/TP1/FUENTES DE CC NO-REGULADAS_240823_1255.pdf",
-                "page": 1,
-                "left": -103,
-                "top": 4,
-                "zoom": 1.1305555555555555
+                "file": "Control 3/TP 1/Tema 01 - IntroduccionControlRobusto_2023.pdf",
+                "page": 65,
+                "left": -69,
+                "top": 0,
+                "zoom": 1.011111111111111
               }
             }
           }
@@ -71,7 +71,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "f25433d372ea52d4",
@@ -87,7 +88,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CE2/TP1/FUENTES DE CC NO-REGULADAS_240823_1255.pdf",
+                "file": "Control 3/TP 1/Tema 01 - IntroduccionControlRobusto_2023.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +105,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "CE2/TP1/FUENTES DE CC NO-REGULADAS_240823_1255.pdf",
+                "file": "Control 3/TP 1/Tema 01 - IntroduccionControlRobusto_2023.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -127,7 +128,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CE2/TP1/FUENTES DE CC NO-REGULADAS_240823_1255.pdf"
+                "file": "Control 3/TP 1/Tema 01 - IntroduccionControlRobusto_2023.pdf"
               }
             }
           }
@@ -154,6 +155,7 @@
   },
   "active": "a99c44494da30acb",
   "lastOpenFiles": [
+    "CE2/TP1/FUENTES DE CC NO-REGULADAS_240823_1255.pdf",
     "CE2/TP3/TP3-AmplisintoPS.pdf",
     "CE2/TP3",
     "CE2/New folder",
@@ -163,7 +165,6 @@
     "CE2/TP1/TP1.1-FuentesCCnoregu-230818.pdf",
     "CE2/TP1/fuentes reguladas de cc.pdf",
     "CE2/TP1/reguladores para alimentacion de cc.pdf",
-    "CE2/TP1/FUENTES DE CC NO-REGULADAS_240823_1255.pdf",
     "Fundamentos/TP 1/TP1_2024.pdf"
   ]
 }

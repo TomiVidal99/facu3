@@ -8,10 +8,6 @@ tags: [excalidraw]
 
 
 # Text Elements
-
-# Embedded files
-9130f7272f7141399803aef32763a2bd2c7d888c: [[Pasted Image 20240919114525_688.png]]
-
 %%
 # Drawing
 ```json
@@ -43223,39 +43219,6 @@ tags: [excalidraw]
 			]
 		},
 		{
-			"type": "image",
-			"version": 196,
-			"versionNonce": 702412606,
-			"isDeleted": false,
-			"id": "_kbJtUc_xBwz_xjHBDWzB",
-			"fillStyle": "solid",
-			"strokeWidth": 0.5,
-			"strokeStyle": "solid",
-			"roughness": 1,
-			"opacity": 100,
-			"angle": 0,
-			"x": -536.4887316845916,
-			"y": 3555.524714366285,
-			"strokeColor": "transparent",
-			"backgroundColor": "transparent",
-			"width": 579,
-			"height": 163,
-			"seed": 138075774,
-			"groupIds": [],
-			"frameId": null,
-			"roundness": null,
-			"boundElements": [],
-			"updated": 1726757681869,
-			"link": null,
-			"locked": false,
-			"status": "pending",
-			"fileId": "9130f7272f7141399803aef32763a2bd2c7d888c",
-			"scale": [
-				1,
-				1
-			]
-		},
-		{
 			"type": "freedraw",
 			"version": 73,
 			"versionNonce": 702545406,
@@ -68698,32 +68661,32 @@ tags: [excalidraw]
 		},
 		{
 			"type": "image",
-			"version": 343,
-			"versionNonce": 842911522,
+			"version": 197,
+			"versionNonce": 2064869400,
 			"isDeleted": true,
-			"id": "qhHAIT0R9Mh00ZSUXL-0m",
+			"id": "_kbJtUc_xBwz_xjHBDWzB",
 			"fillStyle": "solid",
-			"strokeWidth": 2,
+			"strokeWidth": 0.5,
 			"strokeStyle": "solid",
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": -562.9626834080692,
-			"y": -197.68360137939453,
+			"x": -536.4887316845916,
+			"y": 3555.524714366285,
 			"strokeColor": "transparent",
 			"backgroundColor": "transparent",
-			"width": 734.789029535865,
-			"height": 435,
-			"seed": 1147131326,
+			"width": 579,
+			"height": 163,
+			"seed": 138075774,
 			"groupIds": [],
 			"frameId": null,
 			"roundness": null,
 			"boundElements": [],
-			"updated": 1726757787605,
+			"updated": 1726793096148,
 			"link": null,
 			"locked": false,
 			"status": "pending",
-			"fileId": "4b6aaba42c3166d24b1b1d9ff4a3f032c4cc4e94",
+			"fileId": "9130f7272f7141399803aef32763a2bd2c7d888c",
 			"scale": [
 				1,
 				1
@@ -68745,10 +68708,10 @@ tags: [excalidraw]
 		"currentItemTextAlign": "left",
 		"currentItemStartArrowhead": null,
 		"currentItemEndArrowhead": "arrow",
-		"scrollX": 3616.717517180722,
-		"scrollY": -237.87583477724547,
+		"scrollX": 1000.7668210669406,
+		"scrollY": -2852.514614546069,
 		"zoom": {
-			"value": 0.15000000000000002
+			"value": 0.65
 		},
 		"currentItemRoundness": "round",
 		"gridSize": null,

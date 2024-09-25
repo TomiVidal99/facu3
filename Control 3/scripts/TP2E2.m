@@ -1,16 +1,30 @@
-% Resuelvo el problema 1 del TP 2 de control 3
+% Se resulve el ej 2 del TP 2 de control 3
+close all;
 
-% Se grafica la plata para los valores extremos de la incerteza
-% contexto: se tiene un polo y un retardo de modelo de planta: FOPDT,
-% donde el retardo varía entre un mínimo y máximo
+% Contexto: Se tiene una planta con 1 polo y retardo: FOPDT
+% el retardo varía entre un mínimo y máximo.
+% El objetivo es ver el bode cuando se emplean aproximaciones del retardo
 
-s = tf('s');
-plantaNominal = 0.04/(30*s+1)
+s=tf('s');
 
-retardoMin = exp(-(14.73e-3)*s)
-retardoMax = exp(-(14.73e-3)*s)
+plantaNominal=0.04/(30*s+1)
+
+retardoMax=58.90e-3;
+aproxTaylor=1+retardoMax*s
+aproxPade=(1-retardoMax*s*0.5)/(1+retardoMax*s*0.5)
 
 figure();
-bode(plantaNominal*retardoMin);
+bode(plantaNominal*aproxTaylor);
+title('Aprox Taylor');
+grid on;
+
 figure();
-bode(plantaNominal*retardoMax);
+bode(plantaNominal*aproxPade);
+title('Aprox Pade');
+grid on;
+
+figure();
+plantaNominal.OutputDelay=retardoMax;
+bode(plantaNominal);
+title('Sin aprox');
+grid on;

@@ -9,8 +9,8 @@ s=tf('s');
 
 plantaNominal=0.04/(30*s+1)
 
-retardoMin=14.73e-3;
-retardoMax=58.90e-3;
+retardoMin=14.73;
+retardoMax=58.90;
 
 plantaNominal.OutputDelay=retardoMin;
 figure();
@@ -20,6 +20,6 @@ grid on;
 
 plantaNominal.OutputDelay=retardoMax;
 figure();
-bode(plantaNominal*retardoMax);
+bode(plantaNominal);
 title('Retardo maximo');
 grid on;

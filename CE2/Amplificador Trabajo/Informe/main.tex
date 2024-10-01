@@ -129,7 +129,6 @@ fill=green!30]
   {\it 30 de Septiembre, 2024.}
 }                                            % <-this % stops a space
 
-
 \begin{document}
 \maketitle
 \thispagestyle{empty}
@@ -143,10 +142,9 @@ fill=green!30]
   \label{fig:placa}
 \end{figure}
 
-
 \section{Fuente de alimentación}
 El diseño se basa en las especificaciones de una alimentación de \textit{entrada} de $220V_{ef}$ con un \textit{ripple} del $10\%$; y una \textit{salida} en el regulador de 13V con una variación del $7.7\%$ \\
-\hspace{10em} Para cumplir estas especificaciones se emplearon las curvas de \textbf{Schade} que permiten obtener que tensión sin regular se necesita en el capcitor de filtarado, y la tensión alterna que debe haber en el secundario para satisfacer estas especificaciones.
+\hspace*{0.6em} Para cumplir estas especificaciones se emplearon las curvas de \textbf{Schade} que permiten obtener que tensión sin regular se necesita en el capcitor de filtarado, y la tensión alterna que debe haber en el secundario para satisfacer estas especificaciones.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.43\textwidth]{./imagenes/placa_fuente.png}
@@ -154,7 +152,6 @@ El diseño se basa en las especificaciones de una alimentación de \textit{entra
   \label{fig:placa_fuente}
 \end{figure}
 
-Se parte de que en el secundario del transformador se tendrá un \textit{ripple} del $10\%$, así como en el primario. Entonces para el peor caso, \textit{es decir cuando el secundario tiene el pico de tensión mínimo}, se calcula por \textbf{Schade} el valor
 
 
 \end{document}

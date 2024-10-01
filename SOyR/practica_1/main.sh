@@ -115,7 +115,7 @@ clear_products() {
 
 search_product() {
   read -p "Buscar producto por nombre: " pname
-  linenumber=$(cat $PRODUCTS | cut -d',' -f1 | grep -n "$pname" | cut -d':' -f1)
+  linenumber=$(cat $PRODUCTS | cut -d',' -f1 | grep -m 1 -n "$pname" | cut -d':' -f1)
   echo "$linenumber" | xargs -I'{}' sed '{}q;d' $PRODUCTS | less
 }
 

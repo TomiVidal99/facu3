@@ -1,0 +1,6 @@
+# make and run
+make && ./bin/main.o
+# build
+make
+# run
+./bin/main.o

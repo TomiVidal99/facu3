@@ -141,10 +141,10 @@ fill=green!30]
   \caption{Esquemático de la placa a desarrollar}
   \label{fig:placa}
 \end{figure}
+El circuito a implementar consiste de una \textbf{fuente de alimentación}, un \textbf{par complementario} que amplifica la corriente, y dos etapas de \textbf{emisor común} realimentadas que amplifican tensión. Además hay una rama de realimentación de \textbf{boostrapping}.
 
-\section{Fuente de alimentación}
-El diseño se basa en las especificaciones de una alimentación de \textit{entrada} de $220V_{ef}$ con un \textit{ripple} del $10\%$; y una \textit{salida} en el regulador de 13V con una variación del $7.7\%$ \\
-\hspace*{0.6em} Para cumplir estas especificaciones se emplearon las curvas de \textbf{Schade} que permiten obtener que tensión sin regular se necesita en el capcitor de filtarado, y la tensión alterna que debe haber en el secundario para satisfacer estas especificaciones.
+\section{Cálculo de los parámetros de diseño}
+\subsection{Fuente de alimentación}
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.43\textwidth]{./imagenes/placa_fuente.png}
@@ -152,6 +152,21 @@ El diseño se basa en las especificaciones de una alimentación de \textit{entra
   \label{fig:placa_fuente}
 \end{figure}
 
+Especificaciones de entrada:
+\begin{itemize}
+  \item{$220V_{ef} AC$ a 50hz con un ripple del $10\%$}
+\end{itemize}
+Requerimientos de salida:
+\begin{itemize}
+  \item{13V con ripple máximo de $8\%$}
+\end{itemize}
 
+Para cumplir con estas condiciones se empleó un análisis con las siguientes consideraciones:
+\begin{itemize}
+  \item{60V y 1.5A máximos en el LM317}
+  \item{3V mínimos en el LM317}
+  \item{La corriente de ajuste del LM317 tiene que ser más pequeña que la del divisor resistivo $R_1$ y $R_2$}
+  \item{}
+\end{itemize}
 
 \end{document}

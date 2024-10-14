@@ -1,0 +1,217 @@
+{
+  "main": {
+    "id": "49646576e71b8f9f",
+    "type": "split",
+    "children": [
+      {
+        "id": "ce56293b6e9b6206",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c1f2bcc1472c7aa7",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "CE2/TP3/TP3-AmplisintoPS.pdf",
+                "page": 1,
+                "zoom": 1
+              }
+            }
+          },
+          {
+            "id": "654d1157c817a1a1",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "CE2/TP1/Boletin Fapesa (Schade).pdf",
+                "page": 1,
+                "zoom": 1
+              }
+            }
+          },
+          {
+            "id": "5620b0ba87783d1e",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "CE2/TP3/Sinto Pequeña Señal_220923_0851.pdf",
+                "page": 1,
+                "zoom": 1
+              }
+            }
+          },
+          {
+            "id": "83a1df2570004d32",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "SOyR/practica_2/practica2.pdf",
+                "page": 4,
+                "left": -167,
+                "top": 758,
+                "zoom": 1.1
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "662a865e7d5ada86",
+    "type": "split",
+    "children": [
+      {
+        "id": "734ca708b2968c7e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "123a32eded9829bd",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "9c92779004ac0461",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "a482eae290f3178b",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "fbebb0ca83b8221e",
+    "type": "split",
+    "children": [
+      {
+        "id": "d14564044f77b224",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bab1011b50cdfa42",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "SOyR/practica_2/practica2.pdf",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "ea4b48d8005aac03",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "SOyR/practica_2/practica2.pdf",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "37c4790ec9c4e71c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "605c0d974ff41faa",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "SOyR/practica_2/practica2.pdf"
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false,
+      "pdf-plus:PDF++: Toggle auto-copy": false,
+      "pdf-plus:PDF++: Toggle auto-focus": false,
+      "pdf-plus:PDF++: Toggle auto-paste": false
+    }
+  },
+  "active": "83a1df2570004d32",
+  "lastOpenFiles": [
+    "SOyR/practica_2/informe/informe_2.synctex(busy)",
+    "SOyR/practica_2/informe/informe_2.fls",
+    "SOyR/practica_2/informe/informe_2.fdb_latexmk",
+    "SOyR/practica_2/informe/informe_2.aux",
+    "SOyR/practica_2/informe/informe_2.synctex.gz",
+    "SOyR/practica_2/informe/informe_2.log",
+    "SOyR/practica_2/informe/diagrama_flujo_tp2.png",
+    "SOyR/practica_2/informe/DiagFlujoP11TP2.drawio.png",
+    "SOyR/practica_2/informe/diagrama_flujo_tp2.svg",
+    "SOyR/practica_2/informe/DiagFlujoP11TP2.svg",
+    "SOyR/practica_2/informe/informe_2.pdf",
+    "SOyR/practica_2/informe/informe_2.tex",
+    "SOyR/practica_2/informe/ieeeconf.cls",
+    "SOyR/practica_2/informe/informe_1.tex",
+    "CE2/Amplificador Trabajo/Informe/imagenes/circ_eq_ampli_real.png",
+    "CE2/Amplificador Trabajo/Informe/imagenes/circ_eq_lm137_carga.png",
+    "CE2/Amplificador Trabajo/Informe/imagenes/placa.png",
+    "CE2/Amplificador Trabajo/Informe/imagenes/placa_ampli_realimentado.png",
+    "CE2/Amplificador Trabajo/Informe/imagenes/schade_edc_et.png",
+    "CE2/Amplificador Trabajo/Informe/imagenes/schade_edc_et2.png",
+    "Untitled.canvas",
+    "Control 3/TP 3/ej2.excalidraw.md"
+  ]
+}

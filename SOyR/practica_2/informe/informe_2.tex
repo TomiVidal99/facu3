@@ -120,13 +120,13 @@ fill=green!30]
 \usepackage{amsmath} % assumes amsmath package installed
 %\usepackage{amssymb}  % assumes amsmath package installed
 
-\title{\LARGE \bf Entregable Trabajo Práctico N° 1}
+\title{\LARGE \bf Entregable Trabajo Práctico N° 2}
 
 \author{
   Tom\'as Vidal\\
   {\it Sistemas Operativos y Redes}\\
   {\it Facultad de Ingenier\'ia, UNLP, La Plata, Argentina.}\\
-  {\it 17 de Septiembre, 2024.}
+  {\it 14 de Octubre, 2024.}
 }                                            % <-this % stops a space
 
 
@@ -156,36 +156,43 @@ fill=green!30]
 \thispagestyle{empty}
 \pagestyle{empty}
 
-\section{Problema presentado}
-Se debe es desarrollar una interfaz que permita al usuario almacenar datos de manera indefinida en un archivo. Además se debe proveer una lista de funcionalidades que le permita al usuario interactuar con dichos datos.
+\section{Problemas presentados}
+\subsection{Problema 10}
 
-\subsection{Funcionalidades}
-\begin{itemize}
-  \item \textit{Agregar producto:} Se espera que el usuario ingreso los datos correspondientes a un producto al archivo contenedor.
-  \item \textit{Listar productos:} Se muestran todos los productos que hay en el archivo contenedor.
-  \item \textit{Buscar producto:} Se espera que el usuario ingrese un nombre de producto, se muestran los datos del producto si existe.
-  \item \textit{Ordenar productos por precio:} Se muestran todos los productos al usuario pero ordenados por precio, de mayor a menor.
-\end{itemize}
 
-\section{Resolución}
-Se resulve el problema empleando una serie de flujos de datos sobre un bucle principal, que permiten completar las funcionalidades requeridas. El siguiente diagrama de flujo explicita el algoritmo empleado.
-\begin{figure}[H]
+\subsection{Problema 11}
+Se debe crear un programa que pueda actuar de \textit{dos formas diferentes}, como: \textbf{proceso A} o \textbf{proceso B}. Ambos deben poder acceder a un \textit{bloque de memoria compartida}, para poder leer y escribir datos en común. Ambos procesos deben mantener una cierta sincronía, ya que uno no puede leer mientras el otro escribe y viceversa.
+
+\section{Problema 11}
+\subsection{Algorimo implementado}
+En la figura \ref{fig:diag_flujo_p11} se muestra el flujo general del programa. El diagrama es \textit{abierto}, en sentido de que hay caminos en paralelo, esto se debe a que el programa tiene un comportamiento concurrente, ya que se registran manejadores de señales que esperan a ser llamados por \textbf{SIGUSR1} y \textbf{SIGTERM}.
+\begin{figure*}[tb]
   \centering
-  \includegraphics[width=0.43\textwidth]{./diagrama_flujo_tp1.png}
-  \caption{Diagrama de flujo del algoritmo}
-  \label{img:diag_flujo}
-\end{figure}
+  \includegraphics[width=\textwidth]{./diagrama_flujo_tp2.png}
+  \caption{Diagrama de flujo del problema 11.}
+  \label{fig:diag_flujo_p11}
+\end{figure*}
 
-\section{Código}
-Hay algunas partes del código que vale la pena mencionar y explicar en produndidad:
+\subsection{Funciones principales}
 \begin{itemize}
-  \item \textbf{search\_product():} en esta función se busca un producto, para lo cual se empleó \textit{grep} con la \textit{flag} de ennumerar lineas (\textbf{-n}), así se puede volver a iterar sobre los productos, y encontrar la línea con todos los datos correspondientes al encontrado.
-  \item \textbf{add\_product():} en esta función se agrega un producto, cada dato correspondiente al mismo debe cumplir un cierto formato, por lo que se hacen buclen internos que permiten corroborar que se cumplen las condiciones. Para poder inferir las condiciones se emlea \textit{grep} con las flags que permiten el uso de expresiones regulares.
-  \item \textbf{recursión del menu principal:} en vez de emplear un \textit{while} para mostrar el menu princial, se empleó recursión, haciendo que se llame a la función de generar el menu después de cada opción.
-  \item \textbf{empleo del less:} en general para mostrar los datos al usuario se hace uso de \textit{less}, facilitando e integrando el uso del programa. 
+  \item \textit{handle\_termination:} Manejador que se encarga de liberar los recursos y terminar ambos procesos.
+  \item \textit{handle\_write\_read\_a:} Realiza la escritura y lectura acorde a las especificaciones del \textbf{proceso A}.
+  \item \textit{handle\_write\_read\_b:} Realiza la escritura y lectura acorde a las especificaciones del \textbf{proceso B}.
+  \item \textit{cypher:} Función de encriptación de datos.
+  \item \textit{decypher:} Función de desencriptación de datos.
+  \item \textit{setup\_shared\_memory:} Prepara la memoria compartida para ser usada.
+  \item \textit{save\_pid\_to\_shared\_mem:} Guarda en la memoria compartida el PID del proceso actual (A o B).
+  \item \textit{get\_pid\_from\_shared\_mem:} Obtiene el PID del proceso opuesto (A o B).
+  \item \textit{destroy\_memory\_block:} Libera la memoria compartida.
 \end{itemize}
 
-\section{Diagrama de flujo}
-El diagrama de flujo se presenta junto a este archivo en diferentes formatos, para la facilidad del lector.
+\subsection{Explicación general del algorimo}
+Se registran los manejadores para la señal \textbf{SIGUSR1} en ambos procesos; estos manejadores se encargan de la escritura y lectura correspondiente al proceso. Al incio el \textit{proceso A} se envía a sí mismo la señal \textbf{SIGUSR1}, de modo que si el \textit{proceso B} existe, comienza un bucle entre ambos procesos de lectura y escritura, ya que al finalizar estas operaciones, cada proceso envía al otro la misma señal \textbf{SIGUSR1}. \\
+\textit{Para poder enviar señales entre ambos procesos, se emplea la memoria compartida para almacenar el PID correspondiente a ambos procesos, puesto que se guarda un arreglo de \textbf{int} y los PID son del mismo tipo.} \\
+Al comienzo se definen los 20 \textbf{int}, que conforman las palabras 'holamundooholaamundo', encriptadas con las especificiones del problema (es decir son \textit{números del 0 al 26}, que representan las letras de la \textbf{a} a la \textbf{z}), posteriormente en la escritura de ambos procesos, se escriben estos datos nuevamente encriptados con la función provista $f(x)$, y cuando se leen se desencriptan con la función $f^{-1}(x)$
+
+\section{Diagramas}
+Se adjuntan junto al presente las figuras de los diagramas de flujo, para que el lector pueda analizarlas precisamente.
+
 
 \end{document}

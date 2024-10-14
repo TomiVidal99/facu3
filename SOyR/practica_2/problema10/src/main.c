@@ -13,8 +13,8 @@ PIDStack childrenStack = {
 int hasFinished = 0;
 int main(void) {
 
-  signal(SIGUSR1, handle_create_child_1); // registro la señal del usuario
-  signal(SIGUSR2, handle_create_child_2); // registro la señal del usuario
+  signal(SIGUSR1, handle_create_child_1); // registro la señal del usuario SIGUSR1
+  signal(SIGUSR2, handle_create_child_2); // registro la señal del usuario SIGUSR2
   signal(
       SIGTERM,
       handle_terminate_child); // registro la señal de para terminar los hijos
@@ -53,23 +53,23 @@ void handle_create_child_2() {
     return; // solo ejecutar este codigo si es el hijo
 
   int childPID = getpid();
-  printf("Fui creado con SIGUSER2 y mi PID es %d", childPID);
-  char* args[] = {"/usr/bin/ls", "--color", NULL};
-  char* program = "/usr/bin/ls";
+  printf("\nFui creado con SIGUSER2 y mi PID es '%i'\n", childPID);
+  char *args[] = {"/usr/bin/ls", "--color", NULL}; // TODO: hace falta *program y *args???
+  char *program = "/usr/bin/ls";
+  printf("A continuación se ejecuta el comando: 'ls --color .'\n");
   execv(program, args);
-
 }
 
 void push_child(int pid) {
   childrenStack.count = childrenStack.count + 1;
   childrenStack.PIDs[childrenStack.count - 1] = pid;
-  printf("pushing child (%d)\n", childrenStack.count);
+  // printf("pushing child (%d)\n", childrenStack.count);
 }
 
 int pop_child() {
   int pid = childrenStack.PIDs[childrenStack.count - 1];
   childrenStack.count = childrenStack.count - 1;
-  printf("popping child (%d, %d)\n", childrenStack.count, pid);
+  // printf("popping child (%d, %d)\n", childrenStack.count, pid);
   return pid;
 }
 
@@ -81,7 +81,7 @@ void handle_terminate_child() {
   while (childrenStack.count > 0) {
     sleep(CHILDREN_WAIT_RATE_SEC);
     int pid = pop_child();
-    printf("killing: %d\n", pid);
+    printf("Terminando el proceso: '%i'\n", pid);
     kill(pid, SIGKILL);
   }
   hasFinished = 1;

@@ -159,16 +159,31 @@ fill=green!30]
 \section{Problemas presentados}
 \subsection{Problema 10}
 
-
 \subsection{Problema 11}
 Se debe crear un programa que pueda actuar de \textit{dos formas diferentes}, como: \textbf{proceso A} o \textbf{proceso B}. Ambos deben poder acceder a un \textit{bloque de memoria compartida}, para poder leer y escribir datos en común. Ambos procesos deben mantener una cierta sincronía, ya que uno no puede leer mientras el otro escribe y viceversa.
+
+\section{Problema 10}
+En la figura \ref{fig:diag_flujo_p10} se presenta el diagrama de flujo que explica la lógica general implementada en el código. Princialmente se hace uso de una pila, para almacenar los PID de los procesos hijos que se van creando. Se registran las señales: \textbf{SIGUSR1}, \textbf{SIGUSR2} y \textbf{SIGTERM}.
+\subsection{manejador de SIGUSR1}
+Se encarga de crear un proceso hijo con \textit{fork}, que ejecuta de manera indefinida un buclde que imprime su PID y el de su proceso padre cada un segundo.
+\subsection{manejador de SIGUSR2}
+Se encarga de crear un proceso hijo con \textit{fork}, que imprime en pantalla su PID y luego ejecuta el comando: ``\textit{ls --color .}''
+\subsection{manejador de SIGTERM}
+Se encarga de terminar los procesos hijos a razón de uno por segundo (para esto es que se implementó la pila). Luego termina el proceso padre.
+
+\begin{figure*}[tb]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./diagrama_flujo_tp2_p10.png}
+  \caption{Diagrama de flujo del problema 10.}
+  \label{fig:diag_flujo_p10}
+\end{figure*}
 
 \section{Problema 11}
 \subsection{Algorimo implementado}
 En la figura \ref{fig:diag_flujo_p11} se muestra el flujo general del programa. El diagrama es \textit{abierto}, en sentido de que hay caminos en paralelo, esto se debe a que el programa tiene un comportamiento concurrente, ya que se registran manejadores de señales que esperan a ser llamados por \textbf{SIGUSR1} y \textbf{SIGTERM}.
 \begin{figure*}[tb]
   \centering
-  \includegraphics[width=\textwidth]{./diagrama_flujo_tp2.png}
+  \includegraphics[width=\textwidth]{./diagrama_flujo_tp2_p11.png}
   \caption{Diagrama de flujo del problema 11.}
   \label{fig:diag_flujo_p11}
 \end{figure*}
@@ -190,6 +205,7 @@ En la figura \ref{fig:diag_flujo_p11} se muestra el flujo general del programa. 
 Se registran los manejadores para la señal \textbf{SIGUSR1} en ambos procesos; estos manejadores se encargan de la escritura y lectura correspondiente al proceso. Al incio el \textit{proceso A} se envía a sí mismo la señal \textbf{SIGUSR1}, de modo que si el \textit{proceso B} existe, comienza un bucle entre ambos procesos de lectura y escritura, ya que al finalizar estas operaciones, cada proceso envía al otro la misma señal \textbf{SIGUSR1}. \\
 \textit{Para poder enviar señales entre ambos procesos, se emplea la memoria compartida para almacenar el PID correspondiente a ambos procesos, puesto que se guarda un arreglo de \textbf{int} y los PID son del mismo tipo.} \\
 Al comienzo se definen los 20 \textbf{int}, que conforman las palabras 'holamundooholaamundo', encriptadas con las especificiones del problema (es decir son \textit{números del 0 al 26}, que representan las letras de la \textbf{a} a la \textbf{z}), posteriormente en la escritura de ambos procesos, se escriben estos datos nuevamente encriptados con la función provista $f(x)$, y cuando se leen se desencriptan con la función $f^{-1}(x)$
+
 
 \section{Diagramas}
 Se adjuntan junto al presente las figuras de los diagramas de flujo, para que el lector pueda analizarlas precisamente.

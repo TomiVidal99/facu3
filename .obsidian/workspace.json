@@ -13,52 +13,17 @@
             "state": {
               "type": "pdf",
               "state": {
-                "file": "CE2/TP3/TP3-AmplisintoPS.pdf",
-                "page": 1,
-                "zoom": 1
-              }
-            }
-          },
-          {
-            "id": "654d1157c817a1a1",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "CE2/TP1/Boletin Fapesa (Schade).pdf",
-                "page": 1,
-                "zoom": 1
-              }
-            }
-          },
-          {
-            "id": "5620b0ba87783d1e",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "CE2/TP3/Sinto Pequeña Señal_220923_0851.pdf",
-                "page": 1,
-                "zoom": 1
-              }
-            }
-          },
-          {
-            "id": "83a1df2570004d32",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "SOyR/practica_2/practica2.pdf",
-                "page": 3,
-                "left": -167,
-                "top": 455,
-                "zoom": 1.1
-              }
+                "file": "SOyR/practica_3/Práctica 3.pdf",
+                "page": 2,
+                "left": -70,
+                "top": 432,
+                "zoom": 1.9
+              },
+              "icon": "lucide-file-text",
+              "title": "Práctica 3"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -78,7 +43,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
             }
           },
           {
@@ -93,7 +60,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "Search"
             }
           },
           {
@@ -101,14 +70,17 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "fbebb0ca83b8221e",
@@ -132,7 +104,9 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for practica2"
             }
           },
           {
@@ -144,7 +118,9 @@
                 "file": "SOyR/practica_2/practica2.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from practica2"
             }
           },
           {
@@ -155,7 +131,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
             }
           },
           {
@@ -164,8 +142,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SOyR/practica_2/practica2.pdf"
-              }
+                "file": "Control 3/TP 6/TP6_CA3.pdf"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of TP6_CA3"
             }
           }
         ],
@@ -173,7 +153,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -189,26 +170,28 @@
       "pdf-plus:PDF++: Toggle auto-paste": false
     }
   },
-  "active": "83a1df2570004d32",
+  "active": "c1f2bcc1472c7aa7",
   "lastOpenFiles": [
-    "SOyR/practica_2/informe/informe_2.synctex(busy)",
+    "SOyR/practica_3/problema_6/Makefile",
+    "SOyR/practica_3/problema_6/src/main.c",
+    "SOyR/practica_3/problema_6/src",
+    "SOyR/practica_3/problema_6/include/definitions.h",
+    "SOyR/practica_3/problema_6/include",
+    "SOyR/practica_3/problema_6/bin/main.o",
+    "SOyR/practica_3/problema_6/bin",
+    "SOyR/practica_3/problema_6",
+    "SOyR/practica_3/New folder",
+    "Control 3/TP 6/Tema 06 - Introducción al MPC_2024.pdf",
+    "Control 3/TP 6/TP6_CA3.pdf",
+    "Control 3/Untitled.md",
     "SOyR/practica_2/informe/diagrama_flujo_tp2_p10.png",
     "SOyR/practica_2/informe/tp2p10.drawio(1).png",
-    "SOyR/practica_2/informe/informe_2.fls",
-    "SOyR/practica_2/informe/informe_2.fdb_latexmk",
-    "SOyR/practica_2/informe/informe_2.aux",
     "SOyR/practica_2/informe/diagrama_flujo_tp2_p11.png",
     "SOyR/practica_2/informe/tp2p10.drawio.png",
-    "SOyR/practica_2/informe/informe_2.synctex.gz",
-    "SOyR/practica_2/informe/informe_2.log",
     "SOyR/practica_2/informe/diagrama_flujo_tp2.png",
     "SOyR/practica_2/informe/DiagFlujoP11TP2.drawio.png",
     "SOyR/practica_2/informe/diagrama_flujo_tp2.svg",
     "SOyR/practica_2/informe/DiagFlujoP11TP2.svg",
-    "SOyR/practica_2/informe/informe_2.pdf",
-    "SOyR/practica_2/informe/informe_2.tex",
-    "SOyR/practica_2/informe/ieeeconf.cls",
-    "SOyR/practica_2/informe/informe_1.tex",
     "CE2/Amplificador Trabajo/Informe/imagenes/circ_eq_ampli_real.png",
     "CE2/Amplificador Trabajo/Informe/imagenes/circ_eq_lm137_carga.png",
     "Untitled.canvas",

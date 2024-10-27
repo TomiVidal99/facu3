@@ -6,6 +6,9 @@
 
 #include "../include/definitions.h"
 
+#define MY_ARRAY_LENGTH 20
+#define CHARACTER_ASCII_OFFSET 97
+
 // esta es la información que voy a cifrar y luego decifrar
 // const char MY_DATA[10] = {'h', 'o', 'l', 'a', 'm', 'u', 'n', 'd', 'o', 'o'};
 const int MY_DATA_A[10] = {7, 14, 11, 0, 12, 20, 13, 3, 14, 14};

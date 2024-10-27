@@ -28,4 +28,4 @@ $(BUILD_TARGET): $(SRC)
 
 # Clean up build directory
 clean:
-	if exist $(BUILD_DIR) del /Q $(BUILD_DIR)\*
+	rm ./$(BUILD_TARGET)

@@ -1,14 +1,12 @@
-#define CHILD_REPEAT_MSG_DELAY_SEC 5
-#define MAX_CHILDREN_STACK 100 // TODO: tendría que hacer un array dinámico
-#define CHILDREN_WAIT_RATE_SEC 1
+void handle_termination();
+void handle_thread_a();
+void handle_thread_b();
 
-void handle_create_child_1(); // handler que crea el hijo cuando llega SIGUSR1
-void handle_create_child_2(); // handler que crea el hijo cuando llega SIGUSR2
-void handle_terminate_child();
-void push_child(int);
-int pop_child();
+void write_first_segment();
+void read_last_segment();
 
-typedef struct {
-  int PIDs[MAX_CHILDREN_STACK];
-  int count;
-} PIDStack;
+void write_last_segment();
+void read_first_segment();
+
+int cypher(int x);
+int decypher(int x);

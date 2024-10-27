@@ -14,13 +14,77 @@
               "type": "pdf",
               "state": {
                 "file": "SOyR/practica_3/Práctica 3.pdf",
-                "page": 2,
+                "page": 3,
                 "left": -70,
-                "top": 432,
+                "top": 717,
                 "zoom": 1.9
               },
               "icon": "lucide-file-text",
               "title": "Práctica 3"
+            }
+          },
+          {
+            "id": "84165c2fd43e0689",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "SOyR/Teoria/Hilos.pdf",
+                "page": 32,
+                "left": -192,
+                "top": 602,
+                "zoom": 1.1868452380952383
+              },
+              "icon": "lucide-file-text",
+              "title": "Hilos"
+            }
+          },
+          {
+            "id": "e389f7183acc28f1",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "SOyR/Teoria/mutex.pdf",
+                "page": 18,
+                "left": -192,
+                "top": 599,
+                "zoom": 1.1868452380952383
+              },
+              "icon": "lucide-file-text",
+              "title": "mutex"
+            }
+          },
+          {
+            "id": "5dfb7d3af7f15234",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "SOyR/Teoria/SistemasOperativosI.pdf",
+                "page": 26,
+                "left": -174,
+                "top": 546,
+                "zoom": 1.3083333333333333
+              },
+              "icon": "lucide-file-text",
+              "title": "SistemasOperativosI"
+            }
+          },
+          {
+            "id": "3b6176d6a37fe89b",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "SOyR/Teoria/SystemCalls.pdf",
+                "page": 11,
+                "left": -174,
+                "top": 546,
+                "zoom": 1.3083333333333333
+              },
+              "icon": "lucide-file-text",
+              "title": "SystemCalls"
             }
           }
         ]
@@ -79,7 +143,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
+    "width": 453.5,
     "collapsed": true
   },
   "right": {
@@ -172,17 +236,18 @@
   },
   "active": "c1f2bcc1472c7aa7",
   "lastOpenFiles": [
-    "SOyR/practica_3/problema_6/Makefile",
-    "SOyR/practica_3/problema_6/src/main.c",
-    "SOyR/practica_3/problema_6/src",
-    "SOyR/practica_3/problema_6/include/definitions.h",
-    "SOyR/practica_3/problema_6/include",
-    "SOyR/practica_3/problema_6/bin/main.o",
-    "SOyR/practica_3/problema_6/bin",
-    "SOyR/practica_3/problema_6",
-    "SOyR/practica_3/New folder",
-    "Control 3/TP 6/Tema 06 - Introducción al MPC_2024.pdf",
-    "Control 3/TP 6/TP6_CA3.pdf",
+    "SOyR/practica_3/problema_6/README.md",
+    "SOyR/practica_3/problema_6/diagFlujoTP3.png",
+    "SOyR/practica_3/hilos/pthreads2.c",
+    "SOyR/practica_3/hilos/pruebathreads.c",
+    "SOyR/practica_3/hilos/mutex2.c",
+    "SOyR/practica_3/hilos/pruebath3.c",
+    "SOyR/practica_3/hilos/pruebath2.c",
+    "SOyR/practica_3/hilos/mutex3.c",
+    "SOyR/practica_3/hilos/mutex1.o",
+    "SOyR/practica_3/hilos/mutex1.c",
+    "SOyR/practica_3/hilos",
+    "Control 3/TP 0/CA3_TA0.pdf",
     "Control 3/Untitled.md",
     "SOyR/practica_2/informe/diagrama_flujo_tp2_p10.png",
     "SOyR/practica_2/informe/tp2p10.drawio(1).png",
@@ -193,7 +258,6 @@
     "SOyR/practica_2/informe/diagrama_flujo_tp2.svg",
     "SOyR/practica_2/informe/DiagFlujoP11TP2.svg",
     "CE2/Amplificador Trabajo/Informe/imagenes/circ_eq_ampli_real.png",
-    "CE2/Amplificador Trabajo/Informe/imagenes/circ_eq_lm137_carga.png",
     "Untitled.canvas",
     "Control 3/TP 3/ej2.excalidraw.md"
   ]

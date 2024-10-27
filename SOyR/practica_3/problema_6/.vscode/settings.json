@@ -1,0 +1,11 @@
+{
+    "C_Cpp.errorSquiggles": "enabled",
+    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
+    "files.associations": {
+        "unistd.h": "c",
+        "pthread.h": "c",
+        "signal.h": "c",
+        "ipc.h": "c",
+        "definitions.h": "c"
+    }
+}

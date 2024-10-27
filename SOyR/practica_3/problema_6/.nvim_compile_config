@@ -4,3 +4,5 @@ make && ./bin/main.o
 make
 # run
 ./bin/main.o
+# whole command
+cc -Iinclude -Werror -Wfatal-errors -Wall -Wextra src/main.c -o bin/main.o

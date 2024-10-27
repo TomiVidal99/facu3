@@ -1,3 +1,6 @@
+#define MY_ARRAY_LENGTH 20
+#define CHARACTER_ASCII_OFFSET 97
+
 void handle_termination();
 void handle_thread_a();
 void handle_thread_b();

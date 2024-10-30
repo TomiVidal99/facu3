@@ -1,13 +1,9 @@
-CE2/Amplificador Trabajo/Informe/main.aux
-CE2/Amplificador Trabajo/Informe/main.fdb_latexmk
-CE2/Amplificador Trabajo/Informe/main.fls
-CE2/Amplificador Trabajo/Informe/main.log
-CE2/Amplificador Trabajo/Informe/main.synctex.gz
-SOyR/practica_2/informe/informe_2.aux
-SOyR/practica_2/informe/informe_2.fdb_latexmk
-SOyR/practica_2/informe/informe_2.fls
-SOyR/practica_2/informe/informe_2.log
-SOyR/practica_2/informe/informe_2.synctex.gz
 .obsidian/workspace.json
 .obsidian/core-plugins.json
 SOyR/practica_3/hilos/*.o
+*.log
+*.fls
+*.fdb_latexmk
+*.aux
+*.pdf
+*.synctex.gz

@@ -168,7 +168,7 @@ En la figura \ref{fig:diag_flujo} se muestra el flujo general del programa. El d
   \label{fig:diag_flujo}
 \end{figure*}
 
-\subsection{Funciones principales}
+\section{Funciones principales}
 \begin{itemize}
   \item \textit{handle\_termination:} Manejador que se encarga de liberar los recursos compartidos.
   \item \textit{handle\_thread\_a:} Realiza la escritura y lectura acorde a las especificaciones del \textbf{Hilo A}.
@@ -177,9 +177,13 @@ En la figura \ref{fig:diag_flujo} se muestra el flujo general del programa. El d
   \item \textit{decypher:} Función de desencriptación de datos.
 \end{itemize}
 
-\subsection{Explicación general del algorimo}
+\section{Explicación general del algorimo}
 Se registra el manejador para la señal \textbf{SIGTERM}. Luego se crean el \textit{mutex, cond\_a y cond\_b, los hilos A y B}; y se ejecutan los hilos, que quedan en un bucle de ejecución de tiempo indefinido, realizando las escrituras y lecturas acordes a las especificaciones, la sincronización se logra con el mutex y las condiciones compartidas entre los hilos (\textit{cond\_a y cond\_b}). Eventualmente cuando la señal \textbf{SIGTERM} se reciba, se cancelan los bucles de los hilos, y luego de que se terminan las tareas que están realizando finalizan el bucle, se liberan los recursos y finaliza el programa.
 
 Al comienzo se definen los 20 \textbf{int}, que conforman las palabras 'holamundooholaamundo', encriptadas con las especificiones del problema (es decir son \textit{números del 0 al 26}, que representan las letras de la \textbf{a} a la \textbf{z}), posteriormente en la escritura de ambos procesos, se escriben estos datos nuevamente encriptados con la función provista $f(x)$, y cuando se leen se desencriptan con la función $f^{-1}(x)$
+
+\section{Repositorio de Github}
+El trabajo se puede encontrar en el siguiente \href{https://github.com/SOyR-2024-Grupo-10/Entregable-practica-3}{repositorio de Github}. \\ 
+\textit{Para acceder al mismo se deben tener permisos}
 
 \end{document}

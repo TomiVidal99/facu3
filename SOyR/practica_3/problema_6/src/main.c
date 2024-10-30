@@ -25,9 +25,6 @@ bool is_terminated = false;
 int main(void)
 {
 
-  // IMPORTANTE:
-  // leer notas de por qué no incluí la parte de 'programa a' | 'programa b'
-
   // inicializo el mutex
   if (pthread_mutex_init(&mutexLock, NULL) != 0)
   {

@@ -13,78 +13,14 @@
             "state": {
               "type": "pdf",
               "state": {
-                "file": "SOyR/practica_3/Práctica 3.pdf",
-                "page": 3,
-                "left": -70,
-                "top": 717,
-                "zoom": 1.9
+                "file": "CE2/TP2/TP2-2-AmpliaudioGS con bootstrapping.pdf",
+                "page": 2,
+                "left": -535,
+                "top": 836,
+                "zoom": 0.839153323871469
               },
               "icon": "lucide-file-text",
-              "title": "Práctica 3"
-            }
-          },
-          {
-            "id": "84165c2fd43e0689",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "SOyR/Teoria/Hilos.pdf",
-                "page": 32,
-                "left": -192,
-                "top": 602,
-                "zoom": 1.1868452380952383
-              },
-              "icon": "lucide-file-text",
-              "title": "Hilos"
-            }
-          },
-          {
-            "id": "e389f7183acc28f1",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "SOyR/Teoria/mutex.pdf",
-                "page": 18,
-                "left": -192,
-                "top": 599,
-                "zoom": 1.1868452380952383
-              },
-              "icon": "lucide-file-text",
-              "title": "mutex"
-            }
-          },
-          {
-            "id": "5dfb7d3af7f15234",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "SOyR/Teoria/SistemasOperativosI.pdf",
-                "page": 26,
-                "left": -174,
-                "top": 546,
-                "zoom": 1.3083333333333333
-              },
-              "icon": "lucide-file-text",
-              "title": "SistemasOperativosI"
-            }
-          },
-          {
-            "id": "3b6176d6a37fe89b",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "SOyR/Teoria/SystemCalls.pdf",
-                "page": 11,
-                "left": -174,
-                "top": 546,
-                "zoom": 1.3083333333333333
-              },
-              "icon": "lucide-file-text",
-              "title": "SystemCalls"
+              "title": "TP2-2-AmpliaudioGS con bootstrapping"
             }
           }
         ]
@@ -236,6 +172,11 @@
   },
   "active": "c1f2bcc1472c7aa7",
   "lastOpenFiles": [
+    "SOyR/practica_3/Práctica 3.pdf",
+    "SOyR/Teoria/mutex.pdf",
+    "SOyR/practica_3/problema_6/LINK REPO.txt",
+    "SOyR/practica_3/problema_6/LINK.txt",
+    "SOyR/practica_3/problema_6/New Documento de texto.txt",
     "SOyR/practica_3/problema_6/README.md",
     "SOyR/practica_3/problema_6/diagFlujoTP3.png",
     "SOyR/practica_3/hilos/pthreads2.c",
@@ -244,10 +185,6 @@
     "SOyR/practica_3/hilos/pruebath3.c",
     "SOyR/practica_3/hilos/pruebath2.c",
     "SOyR/practica_3/hilos/mutex3.c",
-    "SOyR/practica_3/hilos/mutex1.o",
-    "SOyR/practica_3/hilos/mutex1.c",
-    "SOyR/practica_3/hilos",
-    "Control 3/TP 0/CA3_TA0.pdf",
     "Control 3/Untitled.md",
     "SOyR/practica_2/informe/diagrama_flujo_tp2_p10.png",
     "SOyR/practica_2/informe/tp2p10.drawio(1).png",

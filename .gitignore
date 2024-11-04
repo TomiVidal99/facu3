@@ -4,5 +4,4 @@ SOyR/practica_3/hilos/*.o
 *.fls
 *.fdb_latexmk
 *.aux
-*.pdf
 *.synctex.gz

@@ -5,6 +5,7 @@
 clear all; close all;
 
 %% Load file data
+addpath('c:\Users\tomi\Github\facu3\Control 3\TPA\1')
 data = open('prot_sim_data.dat');
 
 
@@ -21,7 +22,7 @@ hold on;
 grid on;
 
 lineal_time = [0:1e-3:10];
-lineal_y6 = zeros(length(lineal_time));
+lineal_y6 = zeros(1, length(lineal_time));
 n = 2;
 while_break = 0;
 for (i = 2:length(lineal_time))

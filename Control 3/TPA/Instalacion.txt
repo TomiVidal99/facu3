@@ -1,0 +1,1 @@
+Copiar "MODELS" To ProgramData (C:\ProgramData\Labcenter Electronics\Proteus 8 Professional)

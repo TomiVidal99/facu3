@@ -5,7 +5,8 @@
 clear all; close all;
 
 %% Load file data
-addpath('c:\Users\tomi\Github\facu3\Control 3\TPA\1')
+addpath('c:\Users\tomi\Github\facu3\Control 3\TPA\1');
+savepath;
 data = open('prot_sim_data.dat');
 
 

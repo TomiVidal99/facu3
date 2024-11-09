@@ -62,7 +62,7 @@ step_resp=step_resp/0.6; % escalo a que la referencia sea 1, porque se puso 80% 
 step_time = lineal_time(1:length(step_resp));
 step_input = ones(1, length(step_resp)); step_input(1)=0; % esto es para el programa de estimación que necesita una entrada
 
-figure;
+fig = figure; set(fig, 'Units', 'Normalized', 'OuterPosition', [0 0 1 1]); set(fig, 'Toolbar', 'none', 'Menu', 'none');
 plot(step_time, step_resp, 'b', 'linewidth', 4);
 hold on;
 grid on;
@@ -88,8 +88,25 @@ plot(fopdt_est_t, fopdt_est_y, 'k', 'linewidth', 3);
 % title('Modelo FOPDT estimado');
 
 error_fopdt = immse(step_resp, fopdt_est_y);
-fprintf('El error cuadrático medio entre la estimada y los datos es: %f', error_fopdt);
+fprintf('El error cuadrático medio entre la estimada y los datos es: %f\n', error_fopdt);
 
-legend('Respuesta al escalón (datos)', 'Escalón', sprintf('Respuesta estimada con modelo FOPDT (%f)', error_fopdt));
+% Modelo SOPDT
+% Parámetros obtenidos de System Identification
+sopdt_delay = 0.3272;
+sopdt_time_constant_1 = 0.1798;
+sopdt_time_constant_2 = 5;
+sopdt_gain = 1;
 
-%% Modelo SOPDT
+% Modelo FOPDT resultante
+sopdt_estimated = sopdt_gain/((s*sopdt_time_constant_1+1)*(s*sopdt_time_constant_1+1));
+sopdt_estimated.inputDelay = sopdt_delay;
+
+[sopdt_est_y, sopdt_est_t] = step(sopdt_estimated, step_time); sopdt_est_y=reshape(sopdt_est_y, size(step_resp));
+plot(sopdt_est_t, sopdt_est_y, 'm', 'linewidth', 3);
+
+error_sopdt = immse(step_resp, sopdt_est_y);
+fprintf('El error cuadrático medio (SOPDT) entre la estimada y los datos es: %f\n', error_sopdt);
+
+legend('Respuesta al escalón (datos)', 'Escalón', sprintf('Respuesta estimada con modelo FOPDT (%f)', error_fopdt), sprintf('Respuesta estimada con modelo SOPDT (%f)', error_sopdt));
+
+fprintf('La mejora del modelo SOPDT contra FOPDT es de "%f%%"\n', (error_fopdt-error_sopdt)/error_fopdt);

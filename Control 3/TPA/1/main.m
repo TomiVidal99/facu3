@@ -4,14 +4,18 @@
 
 % IMPORTANTE:
 % a data lo normlizo más adelante con respecto a 5v para trabajar entre 0-1
+% NOTAS:
+% Por ahí estaría bueno cambiar la interpolación en la linealizacion de la
+% señal, ahora es de orden 0, estaría bueno usar splines o algo más
+% complejo, seguro que eso mejora el error cuadrático medio.
 
 clear all;
 close all;
 s = tf('s');
 
 %% Load file data
-addpath('c:\Users\tomi\Github\facu3\Control 3\TPA\1');
-savepath;
+%addpath('c:\Users\tomi\Github\facu3\Control 3\TPA\1');
+%savepath;
 data = open('prot_sim_data.dat');
 
 
@@ -84,6 +88,8 @@ plot(fopdt_est_t, fopdt_est_y, 'k', 'linewidth', 3);
 % title('Modelo FOPDT estimado');
 
 error_fopdt = immse(step_resp, fopdt_est_y);
-disp(sprintf('El error cuadrático medio entre la estimada y los datos es: %f', error_fopdt));
+fprintf('El error cuadrático medio entre la estimada y los datos es: %f', error_fopdt);
 
 legend('Respuesta al escalón (datos)', 'Escalón', sprintf('Respuesta estimada con modelo FOPDT (%f)', error_fopdt));
+
+%% Modelo SOPDT

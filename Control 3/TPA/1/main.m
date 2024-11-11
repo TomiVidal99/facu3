@@ -107,6 +107,17 @@ plot(sopdt_est_t, sopdt_est_y, 'm', 'linewidth', 3);
 error_sopdt = immse(step_resp, sopdt_est_y);
 fprintf('El error cuadrático medio (SOPDT) entre la estimada y los datos es: %f\n', error_sopdt);
 
-legend('Respuesta al escalón (datos)', 'Escalón', sprintf('Respuesta estimada con modelo FOPDT (%f)', error_fopdt), sprintf('Respuesta estimada con modelo SOPDT (%f)', error_sopdt));
-
 fprintf('La mejora del modelo SOPDT contra FOPDT es de "%f%%"\n', (error_fopdt-error_sopdt)/error_fopdt);
+
+% Modelo completo a partir de las ecuaciones en diferencias
+R1=10e3;
+C1=10e-6;
+complete_model = 1/((R1*C1*s+1)^6);
+
+[ec_diff_y, ec_diff_t] = step(complete_model, step_time); ec_diff_y=reshape(ec_diff_y, size(step_resp));
+plot(ec_diff_t, ec_diff_y, 'c', 'linewidth', 3);
+
+error_ec_diff = immse(step_resp, ec_diff);
+fprintf('El error cuadrático medio (SOPDT) entre la estimada y los datos es: %f\n', error_ec_diff);
+
+legend('Respuesta al escalón (datos)', 'Escalón', sprintf('Respuesta estimada con modelo FOPDT (%f)', error_fopdt), sprintf('Respuesta estimada con modelo SOPDT (%f)', error_sopdt), sprintf('Modelo a partir de las ec. en diferencias "%f"\n', error_ec_diff));

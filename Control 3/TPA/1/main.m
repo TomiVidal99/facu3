@@ -17,8 +17,8 @@ close all;
 s = tf('s');
 
 %% Load file data
-%addpath('c:\Users\tomi\Github\facu3\Control 3\TPA\1');
-%savepath;
+% addpath('c:\Users\tomi\Github\facu3\Control 3\TPA\1');
+% savepath;
 data = open('prot_sim_data.dat');
 
 
@@ -55,29 +55,6 @@ plot(lineal_time, lineal_y6, 'b', 'linewidth', 4);
 hold on;
 grid on;
 title('Data con tiempo lineal');
-
-%% Acomodar datos de la respuesta al escalón de subida
-step_resp = lineal_y6((3/time_diff):(5/time_diff));
-step_resp=step_resp-0.2; % muevo los datos 0.2 porque se comenzó con 20% de duty cycle
-step_resp=step_resp/0.6; % escalo a que la referencia sea 1, porque se puso 80% de duty cycle como step
-step_time = lineal_time(1:length(step_resp));
-step_input = ones(1, length(step_resp)); step_input(1)=0; % esto es para el programa de estimación que necesita una entrada
-
-%% Acomodar datos de la respuesta al escalón de bajada
-% step_resp_bajada = lineal_y6((6/time_diff):(8/time_diff));
-% step_resp_bajada=step_resp_bajada-0.2; % muevo los datos 0.2 porque se comenzó con 20% de duty cycle
-% step_resp_bajada=step_resp_bajada/0.6; % escalo a que la referencia sea 1, porque se puso 80% de duty cycle como step
-% step_time_bajada = lineal_time(1:length(step_resp_bajada));
-% step_input_bajada = zeros(1, length(step_resp_bajada)); step_input_bajada(1)=1; % esto es para el programa de estimación que necesita una entrada
-% 
-% fig = figure; set(fig, 'Units', 'Normalized', 'OuterPosition', [0 0 1 1]); set(fig, 'Toolbar', 'none', 'Menu', 'none');
-% plot(step_time_bajada, step_resp_bajada, 'b', 'linewidth', 6);
-% hold on;
-% grid on;
-% title('Respuesta al escalón (bajada)');
-% xlabel('Tiempo [Segundos]');
-% ylabel('Tensión normalizada (a 5V) [Volts]');
-% plot(step_time_bajada, step_input_bajada, '--r', 'linewidth', 2);
 
 %% FOPDT
 close all;

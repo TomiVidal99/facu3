@@ -146,7 +146,7 @@ El siguiente informe describe la realización del trabajo de aplicación asignad
 \subsection{Simulación del sistema}
 En esta instancia, se simuló la planta con el objetivo de poder efectuar un análisis de su comportamiento. Esto se realizó en el programa de diseño de circuitos electrónicos y digitales Proteus Design Suite, el mismo nos permitió diseñar y corroborar el correcto funcionamiento de los algoritmos implementados para la síntesis de las diferentes señales de entrada a la planta. Debido a que la planta cuenta con seis componentes capaces de almacenar energía (capacitores), la misma puede modelarse como un sistema lineal de sexto orden. Cada etapa está separada por un amplificador operacional realimentado negativamente y alimentado con cinco voltios. 
 
-\begin{figure}[htpb]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.43\textwidth]{./IMAGENES/diag_placa.png}
   \caption{Esquemático de la placa}
@@ -156,7 +156,7 @@ En esta instancia, se simuló la planta con el objetivo de poder efectuar un an�
 \subsection{Respuesta al escalón}
 Se empleó una señal PWM con ciclo de trabajo del $20\%$, para hacer que la entrada vaya de 0V a 1V (en el segundo 0), luego de que se estableciera la salida (a los 3 segundos), se cambió el PWM al $80\%$ de manera que actuará como escalón, y luego de pasados 3 segundos, se volvió a llevar el ciclo de trabajo al $20\%$. Esto se realizó tanto en simulación (en Proteus), como en la placa física, como los datos son idénticos para ambos casos, de ahora en adelante se referirá solamente a los datos.
 
-\begin{figure}[htpb]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.43\textwidth]{./imagenes/datos_resp_escalon.png}
   \caption{Respuesta al escalón del sistema (\textit{normalizada a 5V})}
@@ -186,7 +186,8 @@ Una vez hecho el relevamiento de los datos, se emplearon para obtener un modelo 
 \subsubsection{Precisión de los modelos}
 
 
-\begin{table}[htpb]
+feat: conclusión y números de páginas
+\begin{table}[H]
 \centering
 \begin{tabular}{|l|c|c|c|}
 \hline
@@ -204,7 +205,7 @@ Es importante tener en cuenta que estos modelos están \textbf{normalizados} con
 \textit{Para corroborar la precisión de los modelos, se obtuvieron más datos con otro escalón, con los que se hicieron las verificaciones y cálculos.}
 Los resultados de estos modelos se presentan en la figura \ref{fig:resp_esc_modelos}, para hacer una mejor interpretación de los datos y los modelos, se centró la respuesta al escalón de los datos entre 1V y 4V, y entre 3 y 6 segundos.
 
-\begin{figure}[htpb]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.43\textwidth]{./IMAGENES/resp_esc.png}
   \caption{Respuesta al escalón de los modelos}
@@ -238,7 +239,7 @@ De manera tal que nuestra familia de plantas queda de la siguiente forma
   G(s) = \frac{e^{-0.33791s}}{0.28802s+1} + (1 + \frac{0.25s}{0.45s+1)}\delta) \hspace{1em},\hspace{1em} |\delta| \leq 1
 \end{equation*}
 
-\begin{figure}[htpb]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.43\textwidth]{./IMAGENES/wa.png}
   \caption{Incertidumbre y modelo $W_a$}
@@ -250,7 +251,7 @@ De manera tal que nuestra familia de plantas queda de la siguiente forma
 Se empleó una señal pseudoaleatoria como entrada al sistema para hacer la identificación del mismo. Se tomó como periodo de la señal $T_{PRBS} = 200ms$ y una cantidad de bits $N=7$, con esto se tiene un tiempo de ensayo $D_s = 25.4$. Estos valores cumplen con la frecuencia de \textit{Nyquist} y el tiempo de \textit{rising} del sistema $t_{r} \cong 1.4segundos$ (ancho de banda $BW = \frac{1}{t_{r}} \cong 0.71Hz$).
 \textit{Nuevamente las tensiones se normalizaron con respecto a 5V.}
 
-\begin{figure}[htpb]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.43\textwidth]{./IMAGENES/datos_prbs.png}
   \caption{Respuesta del sistema a la PRBS}
@@ -274,7 +275,7 @@ Luego se empleó la herramienta \textit{System Identification} para obtener los 
   \tiny{\frac{1.261*10^6}{s^6 + 2.652 s^5 + 109 s^4 + 209.1 s^3 + 3777 s^2 + 4121 s + 4.084*10^{4}}}
 \end{equation}
 
-\begin{table}[htpb]
+\begin{table}[H]
 \centering
 \begin{tabular}{|l|c|c|c|}
 \hline
@@ -334,14 +335,14 @@ Usando una aproximación de Padé de primer orden para el retardo y equiparando 
 Para la sintonización de $T_0$, se diseña el sistema en Simulink\footnote{Herramienta provista en el Toolbox de MATLAB.}. Se evalúa la respuesta al escalón considerando una perturbación también en escalón, aplicada a los 5 segundos. \\
 Primero probamos con un valor pequeño de T0=0.1, donde se observa un sobrepeso significativo en la respuesta (línea amarilla), aunque la perturbación se rechaza. Sin embargo, la acción de control (línea verde) resulta excesiva, dificultando su implementación en un Arduino.\\
 
-\begin{figure}[htpb]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.43\textwidth]{./IMAGENES/pid1.png}
   \caption{Simulación en Simulink \(T_{0} = 0.1\)}
   \label{fig:pid1}
 \end{figure}
 
-\begin{figure}[htpb]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.43\textwidth]{./IMAGENES/pid2.png}
   \caption{Simulación en Simulink \(T_{0} = 0.35\)}
@@ -360,7 +361,7 @@ Para reducir la acción de control y mejorar la velocidad de respuesta sin sobre
 
 El filtro se conecta en serie con la referencia, como se muestra en el diagrama correspondiente:
 
-\begin{figure}[htpb]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.43\textwidth]{./IMAGENES/pid3.png}
   \caption{Diagrama en bloques del sistema en Simulink}
@@ -370,14 +371,14 @@ El filtro se conecta en serie con la referencia, como se muestra en el diagrama 
 Al simular nuevamente con $T_{0}=0.35$, observamos que los picos de la acción de control disminuyen significativamente, lo que indica una mejora en la respuesta. Sin embargo, para garantizar un rango de seguridad adicional y evitar riesgos de inestabilidad o sobrecarga del controlador, se decidió incrementar ligeramente el valor de $T_{0}=0.35$.
 
 
-\begin{figure}[htpb]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.43\textwidth]{./IMAGENES/pid4.png}
   \caption{Simulación en Simulink \(T_{0} = 0.35\)}
   \label{fig:pid4}
 \end{figure}
 
-\begin{figure}[htpb]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.43\textwidth]{./IMAGENES/pid5.png}
   \caption{Simulación en Simulink \(T_{0} = 0.4\)}
@@ -397,7 +398,7 @@ El controlador diseñado demostró cumplir de forma satisfactoria con las especi
 \end{equation*}
 En la siguiente gráfica se puede evaluar esta condición para el controlador diseñado.
 
-\begin{figure}[htpb]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.43\textwidth]{./IMAGENES/pid6.png}
   \caption{Comprobación de condición de robustez}
@@ -486,7 +487,7 @@ Antes de programar el controlador en el microcontrolador, se realizó una simula
 
 Finalmente el programa fue cargado en un Arduino UNO, obteniéndose resultados experimentales consistentes con las simulaciones en MATLAB y Proteus, validando la correcta implementación y sintonización.
 
-\begin{figure}[htpb]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.43\textwidth]{./IMAGENES/pid8.png}
   \caption{Resultado experimental}

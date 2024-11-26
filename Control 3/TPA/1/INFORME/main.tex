@@ -130,10 +130,13 @@ fill=green!30]
   {\it 25 de Noviembre, 2024.}
 }                                            % <-this % stops a space
 
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
 \begin{document}
 \maketitle
-\thispagestyle{empty}
-\pagestyle{empty}
+% \thispagestyle{empty}
+% \pagestyle{plain}
 
 \section{Introducción}
 El siguiente informe describe la realización del trabajo de aplicación asignado a los alumnos de control automatico III, el mismo está dividido en dos secciones la primera que tiene que ver con la identificación de sistemas para una planta dada y una segunda en donde se realizara un paso a paso de la construcción de un un controlador PID para la misma.
@@ -489,5 +492,9 @@ Finalmente el programa fue cargado en un Arduino UNO, obteniéndose resultados e
   \caption{Resultado experimental}
   \label{fig:pid8}
 \end{figure}
+
+\section{Conclusión}
+
+La realización del trabajo permitió abordar de manera integral las etapas clave de un proyecto de control automático, desde la identificación precisa del sistema hasta el diseño y validación experimental de un controlador PID. A través del uso de herramientas como MATLAB, Simulink, Proteus y Arduino, se lograron modelos ajustados a diferentes niveles de precisión y se implementaron estrategias robustas que cumplen con los requisitos de diseño y operan adecuadamente en un entorno físico. Los resultados experimentales y simulados fueron consistentes, validando la metodología empleada y destacando la importancia de la sintonización cuidadosa y la consideración de incertidumbres en sistemas reales.
 
 \end{document}

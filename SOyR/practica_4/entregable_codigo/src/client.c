@@ -9,9 +9,11 @@
 #define TOTAL_NUMS 26    // Total numbers to receive
 #define BUFFER_SIZE 1024 // Size for the buffer to store the "FIN" word
 
+#define DEBUG
+
 int main(int argc, char *argv[])
 {
-  int i, client_socket, bytes_received, encrypted_num, rec_nums[TOTAL_NUMS];
+  int pub_key, i, client_socket, bytes_received, encrypted_num, rec_nums[TOTAL_NUMS];
   uint16_t server_port;
   const char *server_ip;
   struct sockaddr_in server_addr;
@@ -36,7 +38,7 @@ int main(int argc, char *argv[])
   client_socket = socket(AF_INET, SOCK_STREAM, 0);
   if (client_socket < 0)
   {
-    perror("Error al crear el socket");
+    fprintf(stderr, "Error al crear el socket\n");
     exit(EXIT_FAILURE);
   }
 
@@ -46,7 +48,7 @@ int main(int argc, char *argv[])
   server_addr.sin_port = htons(server_port);
   if (inet_pton(AF_INET, server_ip, &server_addr.sin_addr) <= 0)
   {
-    perror("Dirección IP no válida");
+    fprintf(stderr, "Dirección IP no válida\n");
     close(client_socket);
     exit(EXIT_FAILURE);
   }
@@ -54,12 +56,27 @@ int main(int argc, char *argv[])
   // Conectar al servidor
   if (connect(client_socket, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
   {
-    perror("Error al conectar con el servidor");
+    fprintf(stderr, "Error al conectar con el servidor\n");
     close(client_socket);
     exit(EXIT_FAILURE);
   }
 
+#ifdef DEBUG
   printf("Conectado al servidor %s:%d\n", server_ip, server_port);
+  printf("Se espera recibir la clave pública...\n");
+#endif
+
+  if (recv(client_socket, &pub_key, sizeof(pub_key), 0) <= 0)
+  {
+    fprintf(stderr, "Error al recibir la clave pública\n");
+    close(client_socket);
+    exit(EXIT_FAILURE);
+  }
+  pub_key = ntohl(pub_key);
+
+#ifdef DEBUG
+  printf("Clave pública: '%d'\n", pub_key);
+#endif
 
   // Recibir los 26 números descifrados del servidor
   for (i = 0; i < TOTAL_NUMS; i++)
@@ -68,7 +85,7 @@ int main(int argc, char *argv[])
     bytes_received = recv(client_socket, &encrypted_num, sizeof(encrypted_num), 0);
     if (bytes_received <= 0)
     {
-      perror("Error al recibir un número o conexión cerrada");
+      fprintf(stderr, "Error al recibir un número o conexión cerrada\n");
       close(client_socket);
       exit(EXIT_FAILURE);
     }
@@ -83,7 +100,7 @@ int main(int argc, char *argv[])
     bytes_received = recv(client_socket, &byte, sizeof(byte), 0);
     if (bytes_received <= 0)
     {
-      perror("Error al recibir FIN o conexión cerrada");
+      fprintf(stderr, "Error al recibir FIN o conexión cerrada\n");
       close(client_socket);
       exit(EXIT_FAILURE);
     }
@@ -111,7 +128,7 @@ int main(int argc, char *argv[])
   printf("Números descifrados recibidos:\n");
   for (i = 0; i < TOTAL_NUMS; i++)
   {
-    rec_nums[i] = decipher(rec_nums[i]);
+    rec_nums[i] = decipher(rec_nums[i], pub_key);
     printf("%d%c", rec_nums[i], (i < TOTAL_NUMS - 1) ? ',' : '\n');
   }
 
@@ -123,7 +140,7 @@ int main(int argc, char *argv[])
     printf("El programa se terminó correctamente! :)\n");
     if (send(client_socket, END_WORD, strlen(END_WORD) + 1, 0) < 0)
     {
-      fprintf(stderr, "Error enviar eco de FIN");
+      fprintf(stderr, "Error enviar eco de FIN\n");
       close(client_socket);
       exit(EXIT_FAILURE);
     }
@@ -137,4 +154,4 @@ int main(int argc, char *argv[])
   exit(EXIT_SUCCESS);
 }
 
-int decipher(int x) { return (7 * x + 19) % 27; }
+int decipher(int x, int key) { return (x ^ key); }

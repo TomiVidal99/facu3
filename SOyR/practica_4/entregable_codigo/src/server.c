@@ -11,7 +11,7 @@
 
 int main()
 {
-    int i, server_socket, client_socket;
+    int i, server_socket, client_socket, pub_key = htonl(PUBLIC_KEY);
     struct sockaddr_in server_addr, client_addr;
     socklen_t client_addr_len = sizeof(client_addr);
     int num_to_send, num_encrypted;
@@ -29,7 +29,7 @@ int main()
     server_addr.sin_port = htons(PORT);
     server_addr.sin_addr.s_addr = INADDR_ANY;
 
-    // Juntar el socket
+    // Bindear el socket
     if (bind(server_socket, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
     {
         fprintf(stderr, "No se pudo juntar el socket\n");
@@ -43,7 +43,9 @@ int main()
         exit(EXIT_FAILURE);
     }
 
+#ifdef DEBUG
     printf("Esperando conexión del cliente (%d)...\n", PORT);
+#endif
 
     // Aceptar al cliente
     client_socket = accept(server_socket, (struct sockaddr *)&client_addr, &client_addr_len);
@@ -53,9 +55,19 @@ int main()
         exit(EXIT_FAILURE);
     }
 
+#ifdef DEBUG
     printf("Cliente conectado.\n");
+    printf("Enviando clave pública... (%d)\n", pub_key);
+#endif
 
-    // Enviar clave pública??
+    // Enviar clave pública
+    if (send(client_socket, &pub_key, sizeof(pub_key), 0) < 0)
+    {
+        fprintf(stderr, "Falló enviar clave pública \n");
+        close(client_socket);
+        close(server_socket);
+        exit(EXIT_FAILURE);
+    }
 
 #ifdef DEBUG
     for (i = 0; i <= TOTAL_NUMS; i++)
@@ -78,10 +90,10 @@ int main()
     {
         num_to_send = i + 1;
 
-        num_encrypted = encrypt(num_to_send);
+        num_encrypted = encrypt(num_to_send, PUBLIC_KEY);
 
 #ifdef DEBUG
-        if (i < TOTAL_NUMS)
+        if (i < TOTAL_NUMS-1)
         {
             printf("%d, ", num_encrypted);
         }
@@ -113,4 +125,4 @@ int main()
     return 0;
 }
 
-int encrypt(int x) { return (4 * x + 5) % 27; }
+int encrypt(int x, int key) { return (x ^ key); }

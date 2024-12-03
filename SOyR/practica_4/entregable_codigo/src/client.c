@@ -13,7 +13,7 @@
 
 int main(int argc, char *argv[])
 {
-  int pub_key, i, client_socket, bytes_received, encrypted_num, rec_nums[TOTAL_NUMS];
+  int temp_key, i, client_socket, bytes_received, encrypted_num, rec_nums[TOTAL_NUMS];
   uint16_t server_port;
   const char *server_ip;
   struct sockaddr_in server_addr;
@@ -60,23 +60,26 @@ int main(int argc, char *argv[])
     close(client_socket);
     exit(EXIT_FAILURE);
   }
-
 #ifdef DEBUG
   printf("Conectado al servidor %s:%d\n", server_ip, server_port);
-  printf("Se espera recibir la clave pública...\n");
+  printf("Enviando claves públicas...\n");
 #endif
 
-  if (recv(client_socket, &pub_key, sizeof(pub_key), 0) <= 0)
+  temp_key = htonl(PUB_KEY_A);
+  if (send(client_socket, &temp_key, sizeof(temp_key), 0) < 0)
   {
-    fprintf(stderr, "Error al recibir la clave pública\n");
+    fprintf(stderr, "Falló enviar clave pública 'A'\n");
     close(client_socket);
     exit(EXIT_FAILURE);
   }
-  pub_key = ntohl(pub_key);
 
-#ifdef DEBUG
-  printf("Clave pública: '%d'\n", pub_key);
-#endif
+  temp_key = htonl(PUB_KEY_B);
+  if (send(client_socket, &temp_key, sizeof(temp_key), 0) < 0)
+  {
+    fprintf(stderr, "Falló enviar clave pública 'B'\n");
+    close(client_socket);
+    exit(EXIT_FAILURE);
+  }
 
   // Recibir los 26 números descifrados del servidor
   for (i = 0; i < TOTAL_NUMS; i++)
@@ -128,7 +131,7 @@ int main(int argc, char *argv[])
   printf("Números descifrados recibidos:\n");
   for (i = 0; i < TOTAL_NUMS; i++)
   {
-    rec_nums[i] = decipher(rec_nums[i], pub_key);
+    rec_nums[i] = decipher(rec_nums[i]);
     printf("%d%c", rec_nums[i], (i < TOTAL_NUMS - 1) ? ',' : '\n');
   }
 
@@ -154,4 +157,4 @@ int main(int argc, char *argv[])
   exit(EXIT_SUCCESS);
 }
 
-int decipher(int x, int key) { return (x ^ key); }
+int decipher(int x) { return (PRIV_KEY_A * x + PRIV_KEY_B) % 27; }

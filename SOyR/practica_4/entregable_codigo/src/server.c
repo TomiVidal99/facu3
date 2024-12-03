@@ -11,7 +11,7 @@
 
 int main()
 {
-    int i, server_socket, client_socket, pub_key = htonl(PUBLIC_KEY);
+    int i, server_socket, client_socket, pub_key_a, pub_key_b;
     struct sockaddr_in server_addr, client_addr;
     socklen_t client_addr_len = sizeof(client_addr);
     int num_to_send, num_encrypted;
@@ -57,43 +57,56 @@ int main()
 
 #ifdef DEBUG
     printf("Cliente conectado.\n");
-    printf("Enviando clave pública... (%d)\n", pub_key);
+    printf("Esperando clave pública...\n");
 #endif
 
-    // Enviar clave pública
-    if (send(client_socket, &pub_key, sizeof(pub_key), 0) < 0)
+    // Recibir clave pública A
+    if (recv(client_socket, &pub_key_a, sizeof(pub_key_a), 0) <= 0)
     {
-        fprintf(stderr, "Falló enviar clave pública \n");
+        fprintf(stderr, "Error al recibir la clave pública A\n");
         close(client_socket);
-        close(server_socket);
         exit(EXIT_FAILURE);
     }
+    pub_key_a = ntohl(pub_key_a);
+
+    // Recibir clave pública B
+    if (recv(client_socket, &pub_key_b, sizeof(pub_key_b), 0) <= 0)
+    {
+        fprintf(stderr, "Error al recibir la clave pública B\n");
+        close(client_socket);
+        exit(EXIT_FAILURE);
+    }
+    pub_key_b = ntohl(pub_key_b);
 
 #ifdef DEBUG
-    for (i = 0; i <= TOTAL_NUMS; i++)
+    printf("Claves públicas: (A: %d, B: %d)\n", pub_key_a, pub_key_b);
+#endif
+
+#ifdef DEBUG
+    for (i = 0; i < TOTAL_NUMS; i++)
     {
-        if (i < TOTAL_NUMS)
+        if (i < TOTAL_NUMS - 1)
         {
-            printf("%d, ", i);
+            printf("%d, ", i + 1);
         }
         else
         {
-            printf("%d\n", i);
+            printf("%d\n", i + 1);
         }
     }
 #endif
 
-    printf("Enviando encriptados\n\n");
+    printf("Enviando encriptados\n");
 
     // Enviar numeros encriptados
     for (i = 0; i < TOTAL_NUMS; i++)
     {
         num_to_send = i + 1;
 
-        num_encrypted = encrypt(num_to_send, PUBLIC_KEY);
+        num_encrypted = encrypt(num_to_send, pub_key_a, pub_key_b);
 
 #ifdef DEBUG
-        if (i < TOTAL_NUMS-1)
+        if (i < TOTAL_NUMS - 1)
         {
             printf("%d, ", num_encrypted);
         }
@@ -125,4 +138,4 @@ int main()
     return 0;
 }
 
-int encrypt(int x, int key) { return (x ^ key); }
+int encrypt(int x, int key_a, int key_b) { return (key_a * x + key_b) % 27; }

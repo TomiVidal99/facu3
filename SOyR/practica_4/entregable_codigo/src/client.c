@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
   }
 #ifdef DEBUG
   printf("Conectado al servidor %s:%d\n", server_ip, server_port);
-  printf("Enviando claves públicas...\n");
+  printf("Enviando claves públicas... (A: %d, B: %d)\n", PUB_KEY_A, PUB_KEY_B);
 #endif
 
   temp_key = htonl(PUB_KEY_A);
@@ -108,8 +108,10 @@ int main(int argc, char *argv[])
       exit(EXIT_FAILURE);
     }
 
-    // Debug: Mostrar byte recibido
+// Debug: Mostrar byte recibido
+#ifdef DEBUG
     printf("Byte recibido: '%c' (ASCII: %d)\n", byte, byte);
+#endif
 
     if (byte == '\0')
     {

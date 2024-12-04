@@ -27,7 +27,8 @@ int main()
     // Configurar direccion del servidor
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(PORT);
-    server_addr.sin_addr.s_addr = INADDR_ANY;
+    // server_addr.sin_addr.s_addr = INADDR_ANY;
+    server_addr.sin_addr.s_addr = "127.0.0.0";
 
     // Bindear el socket
     if (bind(server_socket, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)

@@ -166,93 +166,55 @@ En la figura \ref{fig:red_dada} se muestra la topología de las redes que fueron
 	\label{fig:red_dada}
 \end{figure}
 
-\subsection{Clase de la dirección IP}
-La dirección IP \textit{163.10.11.2} pertenece a la \textbf{clase B}. Esto se debe a que el primer octeto (\textit{163}) se encuentra en el rango de direcciones de \textbf{clase B}, que va desde \textit{128} hasta \textit{191}.
+\subsection{Dirección IP dada}
+La dirección de IP dada es \textit{181.29.148.0/22}, lo que implica que se pueden asignar un total de \textbf{1024 hosts}. Como la IP comienza con la dirección \textit{181}, la misma pertenece a la \textbf{clase B}
 
-En las direcciones de \textbf{clase B}, el prefijo por defecto es \textit{/16} (es decir, una máscara de red \textit{255.255.0.0}). Esto significa que los primeros 16 bits representan la parte de red, y los 16 bits restantes están destinados a los hosts. Sin embargo, en este caso, el prefijo asignado es \textit{/30}, lo cual indica que la red ha sido subneteada (\textit{subnetting}\footnote{El término \textit{subnetting} hace referencia a la subdivisión de una red en varias subredes}). Esto implica que se está utilizando un rango más pequeño de direcciones IP para optimizar el uso de la red (sólo se disponen de 2 hosts). Este \textit{subnetting} se da entre el ISP y el router que contiene a todas las redes, por eso no se necesitan más dispositivos.
+\subsection{Asignación de IPs}
 
-\subsection{Cantidad de hosts de la red principal}
-La red a la que se la denomina \textit{principal}, contiene a las redes \textbf{Hidráulica, Aeroespacial, Electrónica y la red E}, y tiene un CIDR de \textit{/24}, lo que deja disponibles 8 bits para los hosts. Los 8 bits se obtienen de saber que el total de bits para IPv4 es de 32, entonces:
-
-\begin{equation*}
-	32 - 24 = 8
-\end{equation*}
-
-El número de direcciones que se pueden asignar a hosts se calcula como:
-
-\begin{equation*}
-	2^{8} - 2 = 254
-\end{equation*}
-
-Se restan 2 direcciones porque:
-\begin{itemize}
-	\item Una se utiliza para la dirección de \textbf{red}.
-	\item Otra se utiliza para la dirección de \textbf{broadcast}.
-\end{itemize}
-
-Por lo tanto la cantidad máxima de hosts que puede contener la red princiapl es de \textbf{254 hosts}. De los cuales
-
-\subsection{Hosts en las subredes}
-
-Como se reservan IPs para \textbf{Hidráulica, Aeroespacial, Electrónica, default y broadcast} quedan disponibles para la \textbf{red E} un total de 249 hosts:
-
-\begin{equation*}
-	254 - 5 = 249
-\end{equation*}
-
-\section{Asignación de las IPs}
-
-Para hacer la asignación se tiene en cuenta que la red tiene una IP default \textit{10.0.0.1} con máscara \textit{255.255.255.0}:
-
-% \begin{itemize}
-%   \item \textbf{Hidráulica:} \textit{10.0.0.128/25}, 126 hosts. \textit{Desde 10.0.0.129 hasta 10.0.0.254}
-%   \item \textbf{Aeroespacial:} \textit{10.0.2.0/23}, 510 hosts. \textit{Desde 10.0.1.0 hasta 10.0.3.0}
-%   \item \textbf{Electrotecnia:} \textit{10.0.3.0/23}, 510 hosts. \textit{Desde 10.0.3.0 hasta 10.0.5.0}
-%   {
-%     \begin{itemize}
-%       \item \textbf{Mecánica:} \textit{10.0.3.0/26}, 62 hosts.
-%     \end{itemize}
-%   }
-% \end{itemize}
-
-\begin{table}[H]
-	\centering
-	\begin{tabular}{|l|l|c|c|l|l|}
-		\hline
-		\textbf{Red}  & \textbf{IP} & \textbf{CIDR} & \textbf{Máscara} & \textbf{Rango}          \\ \hline
-		Hidráulica    & 10.0.0.128  & /25           & 255.255.255.128  & 10.0.0.129 - 10.0.0.254 \\ \hline
-		Aeroespacial  & 10.0.2.0    & /23           & 255.255.254.0    & 10.0.2.1 - 10.0.3.254   \\ \hline
-		Electrotecnia & 10.0.4.0    & /23           & 255.255.254.0    & 10.0.4.1 - 10.0.5.254   \\ \hline
-		Mecánica      & 10.0.5.192  & /26           & 255.255.255.192  & 10.0.5.193 - 10.0.5.254 \\ \hline
-	\end{tabular}
-	\caption{Alojamiento de direcciones}
-	\label{tab:subnet_allocation}
-\end{table}
-
-\section{Configuración de las tablas de ruteo}
-
-Se emplearon los siguientes comandos que permiten configurar las \textit{tablas de ruteo}\footnote{Routing tables. Son las tablas que permiten redirijir los paquetes en los routers para que tengan el comportamiento deseado.}:
-
-\begin{itemize}
-	\item ip addr add \textit{'dirección IP'} dev \textit{'interfaz'}
-	\item ip route add \textit{'dirección IP'} via \textit{'dirección IP'}
-	\item ping \textit{'dirección IP'}
-\end{itemize}
-
-Lo que se hizo fué abrir terminales en los diferentes \textit{routers}, y en ellos se configuraron las tablas como se muestra a continuación en las imágenes:
+Para hacer la asignación de IPs a las diferentes interfaces y dispositivos se hizo \textit{subnetting}\footnote{Subnetting es el proceso de dividir una red IP más grande en subredes más pequeñas, con el objetivo de optimizar el uso de direcciones IP, mejorar la seguridad y gestionar el tráfico de red de manera más eficiente.}. El proceso empleado consistió en \textit{dividir recursivamente} la IP dada en subredes más pequeñas, teniendo en cuenta las redes con mayor requerimiento de \textit{hosts}\footnote{Hosts son dispositivos conectados a una red que pueden enviar y recibir datos, como computadoras, servidores, teléfonos inteligentes, impresoras o cualquier otro equipo con una dirección IP asignada.}, es decir la \textbf{Red B}, luego la \textbf{Red A}, \textbf{D}, \textbf{C} y por último los enlaces punto a punto, para los cuales se empleó un CIDR de 30 (lo que permite optimizar la cantidad hosts).
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.43\textwidth]{./Imagenes/table1_AERO.png}
-	\caption{Tablas de ruteo del router de aeroespacial}
-	\label{fig:table_aero1}
+	\includegraphics[width=0.43\textwidth]{./Imagenes/red_subnetting_diseno.jpg}
+	\caption{Diseño de la red para hacer subnetting}
 \end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.43\textwidth]{./Imagenes/subnetting_total.jpg}
+	\caption{Diseño subnetting de la red}
+\end{figure}
+
+\subsection{Simulación en Core Emulator}
+
+Luego de diseñar la red y las subredes se aplicaron las IPs en el simulador Core Emulator. Se corroboró el correcto enrutamiento de paquetes entre las redes por medio del comando \textit{traceroute}, proporcionado en una interfaz gráfica en Core Emulator, los resultados se muestran a continuación:
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.43\textwidth]{./Imagenes/traceroute_1.png}
+	\caption{Traceroute desde n10 a n11}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.43\textwidth]{./Imagenes/traceroute_2.png}
+	\caption{Traceroute desde n6 a n9}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.43\textwidth]{./Imagenes/traceroute_3.png}
+	\caption{Traceroute desde n8 a n9}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.43\textwidth]{./Imagenes/traceroute_4.png}
+	\caption{Traceroute desde n10 a n9}
+\end{figure}
+
 
 \section{Implementación del servidor TCP}
 
-El protocolo TCP descompone los datos en paquetes y los reenvía a la capa del protocolo de Internet (IP) para garantizar que cada mensaje llegue a su ordenador de destino. El estado actual de desarrollo del protocolo TCP permite establecer una conexión entre dos puntos terminales en una red informática común que posibilite un intercambio mutuo de datos. En este proceso, cualquier pérdida de datos se detecta y resuelve, por lo que se considera un protocolo fiable. \\
-
-La secuencia específica para establecer una conexión con el protocolo TCP es la siguiente:
+El protocolo TCP descompone los datos en paquetes y los reenvía a la capa del protocolo de Internet (IP) para garantizar que cada mensaje llegue a su ordenador de destino. El estado actual de desarrollo del protocolo TCP permite establecer una conexión entre dos puntos terminales en una red informática común que posibilite un intercambio mutuo de datos. En este proceso, cualquier pérdida de datos se detecta y resuelve, por lo que se considera un protocolo fiable. La secuencia específica para establecer una conexión con el protocolo TCP es la siguiente:
 
 \begin{enumerate}
 	\item En el primer paso, el cliente que desea establecer la conexión envía al servidor un paquete SYN o segmento SYN (del inglés synchronize = “sincronizar”) con un número de secuencia individual y aleatorio. Este número garantiza la transmisión completa en el orden correcto (sin duplicados).
@@ -276,6 +238,52 @@ La secuencia específica para establecer una conexión con el protocolo TCP es l
 	\label{fig:tcp_header}
 \end{figure}
 
+\subsection{Lógica del código}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=270pt]{./Imagenes/diagrama_flujo_server.png}
+	\caption{Diagrama de flujo del servidor}
+	\label{fig:flujo_server}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=270pt]{./Imagenes/diag_flujo_cliente.png}
+	\caption{Diagrama de flujo del cliente}
+	\label{fig:flujo_cliente}
+\end{figure}
+
+Los diagramas \ref{fig:flujo_cliente} y \ref{fig:flujo_server} explican el comportamiente general de ambos programas. Las principales características son:
+
+\subsubsection{Cliente}
+\begin{itemize}
+	\item Debe recibir como parámetro la \textbf{IP} y el \textbf{puerto} del servidor para conectarse.
+	\item Debe \textbf{enviar} la clave pública de encriptación.
+	\item Imprime los datos desencriptados en pantalla.
+\end{itemize}
+
+\subsubsection{Server}
+\begin{itemize}
+	\item El puerto por defecto es \textbf{8080}.
+	\item Debe \textbf{recibir} la clave pública de encriptación.
+	\item Enviar los datos encriptados con la llave pública.
+\end{itemize}
+
+\textit{En los códigos se pueden habilitar los comentarios de debugeo descomentando el macro DEBUG. Para recompilar los códigos se puede emplear el Makefile, corriendo: make client y make server.}
+
+\subsection{Capturas de paquetes con Wireshark}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.43\textwidth]{./Imagenes/wireshark_1.png}
+	\caption{Captura de paquetes cliente servidor con Wireshark}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.43\textwidth]{./Imagenes/captura_tcp_en_core.png}
+	\caption{Comunicación entre cliente y servidor en Core Emulator}
+\end{figure}
 
 \end{document}

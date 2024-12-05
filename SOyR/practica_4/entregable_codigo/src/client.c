@@ -3,26 +3,27 @@
 #include <string.h>
 #include <unistd.h>
 #include <arpa/inet.h>
+#include <signal.h>
 
 #include "definitions_client.h"
 
-#define TOTAL_NUMS 26    // Total numbers to receive
-#define BUFFER_SIZE 1024 // Size for the buffer to store the "FIN" word
+#define TOTAL_NUMS 26
 
-#define DEBUG
+// #define DEBUG
+
+int client_socket;
 
 int main(int argc, char *argv[])
 {
-  int temp_key, i, client_socket, bytes_received, encrypted_num, rec_nums[TOTAL_NUMS];
+  int temp_key, i, bytes_received, encrypted_num, rec_nums[TOTAL_NUMS];
   uint16_t server_port;
   const char *server_ip;
   struct sockaddr_in server_addr;
-  char buffer[BUFFER_SIZE];
-  char byte;
 
-  // Inicializar los números recibidos y el buffer
+  signal(SIGTERM, handle_termination);
+
+  // Inicializar los números recibidos
   memset(rec_nums, 0, sizeof(rec_nums));
-  memset(buffer, 0, sizeof(buffer));
 
   // Validar argumentos
   if (argc != 3)
@@ -95,68 +96,29 @@ int main(int argc, char *argv[])
     rec_nums[i] = encrypted_num;
   }
 
-  // Ahora recibir la palabra "FIN"
-  i = 0;
-  while (1)
-  {
-    byte = '\0';
-    bytes_received = recv(client_socket, &byte, sizeof(byte), 0);
-    if (bytes_received <= 0)
-    {
-      fprintf(stderr, "Error al recibir FIN o conexión cerrada\n");
-      close(client_socket);
-      exit(EXIT_FAILURE);
-    }
-
-// Debug: Mostrar byte recibido
 #ifdef DEBUG
-    printf("Byte recibido: '%c' (ASCII: %d)\n", byte, byte);
-#endif
-
-    if (byte == '\0')
-    {
-      break;
-    }
-    if (i < BUFFER_SIZE - 1)
-    {
-      buffer[i++] = byte;
-    }
-  }
-  buffer[i] = '\0'; // Asegurar terminador nulo
-
   printf("Números recibidos:\n");
   for (i = 0; i < TOTAL_NUMS; i++)
   {
     printf("%d%c", rec_nums[i], (i < TOTAL_NUMS - 1) ? ',' : '\n');
   }
+#endif
 
-  printf("Números descifrados recibidos:\n");
+  printf("Números recibidos descifrados:\n");
   for (i = 0; i < TOTAL_NUMS; i++)
   {
     rec_nums[i] = decipher(rec_nums[i]);
     printf("%d%c", rec_nums[i], (i < TOTAL_NUMS - 1) ? ',' : '\n');
   }
 
-  printf("Mensaje recibido: '%s'\n", buffer);
+  handle_termination();
 
-  // Verificar si el mensaje es "FIN"
-  if (strcmp(buffer, END_WORD) == 0)
-  {
-    printf("El programa se terminó correctamente! :)\n");
-    if (send(client_socket, END_WORD, strlen(END_WORD) + 1, 0) < 0)
-    {
-      fprintf(stderr, "Error enviar eco de FIN\n");
-      close(client_socket);
-      exit(EXIT_FAILURE);
-    }
-  }
-  else
-  {
-    fprintf(stderr, "Se esperaba recibir el mensaje 'FIN'. Pero no se obtuvo\n");
-  }
-
-  close(client_socket);
   exit(EXIT_SUCCESS);
 }
 
-int decipher(int x) { return (PRIV_KEY_A * x + PRIV_KEY_B) % 27; }
+int decipher(int x) { return ((PRIV_KEY_A * x + PRIV_KEY_B) % 27); }
+
+void handle_termination()
+{
+  close(client_socket);
+}

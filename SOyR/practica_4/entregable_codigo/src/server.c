@@ -4,17 +4,22 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include <signal.h>
 
 #include "definitions_server.h"
 
-#define DEBUG
+// #define DEBUG
+
+int server_socket, client_socket;
 
 int main()
 {
-    int i, server_socket, client_socket, pub_key_a, pub_key_b;
+    int i, pub_key_a, pub_key_b;
     struct sockaddr_in server_addr, client_addr;
     socklen_t client_addr_len = sizeof(client_addr);
     int num_to_send, num_encrypted;
+
+    signal(SIGTERM, handle_termination);
 
     // Crear socket
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
@@ -27,8 +32,11 @@ int main()
     // Configurar direccion del servidor
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(PORT);
-    // server_addr.sin_addr.s_addr = INADDR_ANY;
-    server_addr.sin_addr.s_addr = "127.0.0.0";
+#ifdef DEFAULT_ADDR
+    server_addr.sin_addr.s_addr = inet_addr(DEFAULT_ADDR);
+#else
+    server_addr.sin_addr.s_addr = INADDR_ANY;
+#endif
 
     // Bindear el socket
     if (bind(server_socket, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
@@ -97,7 +105,9 @@ int main()
     }
 #endif
 
+#ifdef DEBUG
     printf("Enviando encriptados\n");
+#endif
 
     // Enviar numeros encriptados
     for (i = 0; i < TOTAL_NUMS; i++)
@@ -126,17 +136,14 @@ int main()
         }
     }
 
-    if (send(client_socket, END_WORD, strlen(END_WORD) + 1, 0) < 0)
-    {
-        fprintf(stderr, "Error al enviar FIN");
-        close(client_socket);
-        exit(EXIT_FAILURE);
-    }
-
-    // Cerrar conexiones y limpiar memoria
-    close(client_socket);
-    close(server_socket);
+    handle_termination();
     return 0;
 }
 
 int encrypt(int x, int key_a, int key_b) { return (key_a * x + key_b) % 27; }
+
+void handle_termination()
+{
+    close(client_socket);
+    close(server_socket);
+}

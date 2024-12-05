@@ -4,6 +4,15 @@ node n1 {
     network-config {
 	hostname CENTRAL
 	!
+	interface eth3
+	 ip address 181.29.150.2/30
+	!
+	interface eth2
+	 ip address 181.29.150.18/30
+	!
+	interface eth1
+	 ip address 181.29.150.10/30
+	!
 	interface eth0
 	 ip address 163.10.11.2/30
 	!
@@ -11,21 +20,16 @@ node n1 {
 	 ip address 10.0.0.1/24
 	 ipv6 address 2001:0::1/64
 	!
-	interface eth3
-	!
-	interface eth2
-	!
-	interface eth1
-	!
     }
     canvas c1
-    iconcoords {494.0 224.0}
-    labelcoords {487.0 197.0}
+    iconcoords {488.5 172.5}
+    labelcoords {481.5 145.5}
     interface-peer {eth0 n2}
     interface-peer {eth1 n3}
     interface-peer {eth2 n4}
     interface-peer {eth3 n7}
     interface-peer {eth4 n11}
+    services {}
 }
 
 node n2 {
@@ -51,17 +55,21 @@ node n3 {
 	hostname HIDRAULICA
 	!
 	interface eth3
-	!
-	interface eth2
+	 ip address 181.29.150.6/30
 	!
 	interface eth1
+	 ip address 181.29.150.13/30
 	!
 	interface eth0
+	 ip address 181.29.150.9/30
+	!
+	interface eth2
+	 ip address 181.29.151.1/24
 	!
     }
     canvas c1
-    iconcoords {272.0 428.0}
-    labelcoords {228.0 405.0}
+    iconcoords {260.0 435.0}
+    labelcoords {216.0 412.0}
     interface-peer {eth0 n1}
     interface-peer {eth1 n4}
     interface-peer {eth2 n6}
@@ -75,12 +83,16 @@ node n4 {
 	hostname ELECTROTECNIA
 	!
 	interface eth3
-	!
-	interface eth2
+	 ip address 181.29.150.17/30
 	!
 	interface eth1
+	 ip address 181.29.150.21/30
 	!
 	interface eth0
+	 ip address 181.29.150.14/30
+	!
+	interface eth2
+	 ip address 181.29.148.1/23
 	!
     }
     canvas c1
@@ -98,9 +110,11 @@ node n5 {
     network-config {
 	hostname MECANICA
 	!
-	interface eth1
-	!
 	interface eth0
+	 ip address 181.29.150.22/30
+	!
+	interface eth1
+	 ip address 181.29.150.65/26
 	!
     }
     canvas c1
@@ -117,6 +131,7 @@ node n6 {
 	hostname n6
 	!
 	interface eth0
+	 ip address 181.29.151.2/24
 	!
     }
     canvas c1
@@ -132,11 +147,12 @@ node n8 {
 	hostname n8
 	!
 	interface eth0
+	 ip address 181.29.148.2/23
 	!
     }
     canvas c1
-    iconcoords {471.0 598.0}
-    labelcoords {471.0 630.0}
+    iconcoords {505.6666666666667 495.3333333333333}
+    labelcoords {505.6666666666667 527.3333333333334}
     interface-peer {eth0 n4}
 }
 
@@ -147,6 +163,7 @@ node n9 {
 	hostname n9
 	!
 	interface eth0
+	 ip address 181.29.150.66/26
 	!
     }
     canvas c1
@@ -161,16 +178,19 @@ node n7 {
     network-config {
 	hostname AEROESPACIAL
 	!
-	interface eth2
-	!
 	interface eth1
+	 ip address 181.29.150.5/30
 	!
 	interface eth0
+	 ip address 181.29.150.1/30
+	!
+	interface eth2
+	 ip address 181.29.150.129/25
 	!
     }
     canvas c1
-    iconcoords {304.0 224.0}
-    labelcoords {378.0 213.0}
+    iconcoords {304.5 217.0}
+    labelcoords {378.5 206.0}
     interface-peer {eth0 n1}
     interface-peer {eth1 n3}
     interface-peer {eth2 n10}
@@ -183,11 +203,12 @@ node n10 {
 	hostname n10
 	!
 	interface eth0
+	 ip address 181.29.150.130/25
 	!
     }
     canvas c1
-    iconcoords {93.0 144.0}
-    labelcoords {93.0 176.0}
+    iconcoords {95.0 138.0}
+    labelcoords {95.0 170.0}
     interface-peer {eth0 n7}
 }
 
@@ -203,8 +224,8 @@ node n11 {
 	!
     }
     canvas c1
-    iconcoords {756.0 298.0}
-    labelcoords {750.0 277.0}
+    iconcoords {773.5 318.5}
+    labelcoords {767.5 297.5}
     interface-peer {eth0 n1}
 }
 
@@ -302,7 +323,7 @@ annotation a1 {
     label {RED A}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #C0C0FF
     width 0
     border black
@@ -316,7 +337,7 @@ annotation a6 {
     label {RED B}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #ae7bff
     width 0
     border black
@@ -330,7 +351,7 @@ annotation a7 {
     label {RED C}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #ffc0ff
     width 0
     border black
@@ -344,7 +365,7 @@ annotation a8 {
     label {RED D}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #09be4e
     width 0
     border black
@@ -358,7 +379,7 @@ annotation a9 {
     label {RED E}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #ff6843
     width 0
     border black
@@ -371,7 +392,7 @@ canvas c1 {
 }
 
 option global {
-    interface_names no
+    interface_names yes
     ip_addresses yes
     ipv6_addresses no
     node_labels yes

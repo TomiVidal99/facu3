@@ -187,7 +187,16 @@ Para hacer la asignación de IPs a las diferentes interfaces y dispositivos se h
 
 \subsection{Simulación en Core Emulator}
 
-Luego de diseñar la red y las subredes se aplicaron las IPs en el simulador Core Emulator. Se corroboró el correcto enrutamiento de paquetes entre las redes por medio del comando \textit{traceroute}, proporcionado en una interfaz gráfica en Core Emulator, los resultados se muestran a continuación:
+Luego de diseñar la red y las subredes se aplicaron las IPs en el simulador Core Emulator, y para que se puedan transferir paquetes entre estas redes correctamente se hicieron enrutamientos en los diferentes \textit{routers} con los comandos:
+
+\begin{enumerate}
+	\item ip route add [GATEWAY \textit{cual}]/[CIDR] via [IP \textit{desde}] \label{cmd:add}
+	\item ip route del [GATEWAY \textit{cual}]/[CIDR] via [IP \textit{desde}] \label{cmd:del}
+\end{enumerate}
+
+El comando \ref{cmd:add} se empleó para agregar redes (revelar tablas de enrutamiento), y el comando \ref{cmd:del} para eliminar una red que era incorrecta. Para guardar los cambios hechos en las tablas de enrutamiento se empleó el script provisto \textit{save}, el cual salva los cambios en el archivo ``core.txt'', además se puede emplear el comando \textit{restore core.txt} para restaurar estos cambios cuando se recarga el archivo de la topología en el Core Emulator.
+
+Se corroboró el correcto enrutamiento de paquetes entre las redes por medio del comando \textit{traceroute}, proporcionado en una interfaz gráfica en Core Emulator, los resultados se muestran a continuación:
 
 
 \begin{figure}[H]
@@ -210,6 +219,11 @@ Luego de diseñar la red y las subredes se aplicaron las IPs en el simulador Cor
 	\includegraphics[width=0.43\textwidth]{./Imagenes/traceroute_4.png}
 	\caption{Traceroute desde n10 a n9}
 \end{figure}
+
+Para corroborar que los dispositivos tuvieran conexión a internet se hizo \textit{traceroute} de los diferentes dispositivos a la IP \textit{163.10.11.1} (ISP).
+\textit{En la realidad habría que hacer un ping o traceroute a la dirección 8.8.8.8 por ejemplo, o alguna conocida como google.com.ar. Pero en este caso se simula que la conexión a internet está hecha cuando se pueden dirigir paquetes al ISP}
+
+También se tendría que implementar un NAT en el central o en el ISP para enmascarar las IPs privadas. Pero si se tuviera que implementar no se podría hacer en el router del ISP, ya que no hay acceso al mismo, por lo tanto solo se podría hacer en el central.
 
 
 \section{Implementación del servidor TCP}
@@ -274,16 +288,41 @@ Los diagramas \ref{fig:flujo_cliente} y \ref{fig:flujo_server} explican el compo
 
 \subsection{Capturas de paquetes con Wireshark}
 
+Se ejecutó el servidor en el dispositvo \textbf{n6} (\textit{181.29.150.2}) y el cliente en el dispositvo \textbf{n10} (\textit{181.29.150.130}), y con Wireshark\footnote{TODO} se hizo la captura de los paquetes en el cliente. En las siguientes figuras se muestra como se capturan los datos, además se puede ver como se hace la conexión TCP como se explicó en \ref{fig:tcp_ack}.
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.43\textwidth]{./Imagenes/wireshark_1.png}
-	\caption{Captura de paquetes cliente servidor con Wireshark}
+	\includegraphics[width=0.43\textwidth]{./Imagenes/captura_wireshark_n6_n10.png}
+	\caption{Trafico entre \textbf{n6} y \textbf{n10}}
+	\label{fig:wireshark_n6_n10}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.43\textwidth]{./Imagenes/captura_tcp_en_core.png}
-	\caption{Comunicación entre cliente y servidor en Core Emulator}
+	\includegraphics[width=0.43\textwidth]{./Imagenes/trafico0.png}
+	\caption{Trafico entre \textbf{n6} y \textbf{n10}, TCP}
+	\label{fig:wireshark_0}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.43\textwidth]{./Imagenes/trafico1.png}
+	\caption{Trafico entre \textbf{n6} y \textbf{n10}, TCP SYN}
+	\label{fig:wireshark_1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.43\textwidth]{./Imagenes/trafico2.png}
+	\caption{Trafico entre \textbf{n6} y \textbf{n10}, TCP SYN-ACK}
+	\label{fig:wireshark_2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.43\textwidth]{./Imagenes/trafico3.png}
+	\caption{Trafico entre \textbf{n6} y \textbf{n10}, TCP ACK}
+	\label{fig:wireshark_3}
 \end{figure}
 
 \end{document}

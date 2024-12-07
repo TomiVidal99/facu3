@@ -221,10 +221,10 @@ Se corroboró el correcto enrutamiento de paquetes entre las redes por medio del
 \end{figure}
 
 Para corroborar que los dispositivos tuvieran conexión a internet se hizo \textit{traceroute} de los diferentes dispositivos a la IP \textit{163.10.11.1} (ISP).
-\textit{En la realidad habría que hacer un ping o traceroute a la dirección 8.8.8.8 por ejemplo, o alguna conocida como google.com.ar. Pero en este caso se simula que la conexión a internet está hecha cuando se pueden dirigir paquetes al ISP}
 
-También se tendría que implementar un NAT en el central o en el ISP para enmascarar las IPs privadas. Pero si se tuviera que implementar no se podría hacer en el router del ISP, ya que no hay acceso al mismo, por lo tanto solo se podría hacer en el central.
+\textit{En la realidad habría que hacer un ping o traceroute a la dirección 8.8.8.8 por ejemplo, o alguna conocida como google.com.ar. Pero en este caso se simula que la conexión a internet está hecha cuando se pueden dirigir paquetes al ISP.}
 
+También sería necesario implementar un NAT\footnote{NAT (Network Address Translation) es una técnica utilizada en redes para modificar las direcciones IP en los paquetes de datos que pasan a través de un router o firewall. Permite que múltiples dispositivos en una red local (LAN) compartan una única dirección IP pública, facilitando la conservación de direcciones IPv4 y añadiendo una capa de seguridad al ocultar las direcciones internas de los dispositivos.} en el \textit{router central} o en el \textit{router del ISP} para enmascarar las IPs privadas. Sin embargo, si se tuviera que implementar en un escenario real, no sería posible hacerlo en el \textit{router del ISP} debido a la falta de acceso, por lo que únicamente podría realizarse en el \textit{router central}.
 
 \section{Implementación del servidor TCP}
 
@@ -288,7 +288,7 @@ Los diagramas \ref{fig:flujo_cliente} y \ref{fig:flujo_server} explican el compo
 
 \subsection{Capturas de paquetes con Wireshark}
 
-Se ejecutó el servidor en el dispositvo \textbf{n6} (\textit{181.29.150.2}) y el cliente en el dispositvo \textbf{n10} (\textit{181.29.150.130}), y con Wireshark\footnote{TODO} se hizo la captura de los paquetes en el cliente. En las siguientes figuras se muestra como se capturan los datos, además se puede ver como se hace la conexión TCP como se explicó en \ref{fig:tcp_ack}.
+Se ejecutó el servidor en el dispositvo \textbf{n6} (\textit{181.29.150.2}) y el cliente en el dispositvo \textbf{n10} (\textit{181.29.150.130}), y con Wireshark\footnote{Wireshark es un analizador de protocolos de red de código abierto que permite capturar y examinar en detalle el tráfico de datos en una red en tiempo real. Es ampliamente utilizado en la industria para diagnóstico de problemas, desarrollo de software y aprendizaje de protocolos de comunicación.} se hizo la captura de los paquetes en el cliente. En las siguientes figuras se muestra como se capturan los datos, además se puede ver como se hace la conexión TCP como se explicó en \ref{fig:tcp_ack}.
 
 \begin{figure}[H]
 	\centering
@@ -324,5 +324,25 @@ Se ejecutó el servidor en el dispositvo \textbf{n6} (\textit{181.29.150.2}) y e
 	\caption{Trafico entre \textbf{n6} y \textbf{n10}, TCP ACK}
 	\label{fig:wireshark_3}
 \end{figure}
+
+A continuación, se muestran los paquetes que contienen los datos. En la figura \ref{fig:wireshark_4} se observa que la bandera PUSH está en 1, lo que indica que la transmisión se realiza de un dato (número) a la vez. También se puede notar que la transmisión es del cliente al servidor, ya que dicho dato corresponde a la clave pública. Posteriormente, en la figura 18 se muestra cómo el TCP Segment Len es distinto de 0, ya que se están transmitiendo datos. Este paquete en particular corresponde a uno de los números encriptados que el servidor transmite. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.43\textwidth]{./Imagenes/tcp_datos_1.png}
+	\caption{Trafico entre \textbf{n6} y \textbf{n10}}
+	\label{fig:wireshark_4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.43\textwidth]{./Imagenes/tcp_datos_2.png}
+	\caption{Trafico entre \textbf{n6} y \textbf{n10}}
+	\label{fig:wireshark_5}
+\end{figure}
+
+\subsection{Archivos}
+
+Junto al presente se adjuntan las imágenes para que el lector las pueda ver con más detalle, además se encuentra un archivo (``core.txt'') que contiene los datos sobre el enrutamiento de la topología dada.
 
 \end{document}

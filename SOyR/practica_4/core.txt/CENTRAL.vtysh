@@ -1,0 +1,60 @@
+!
+!
+service integrated-vtysh-config
+!
+debug ospf6 lsa unknown
+!
+interface eth0
+ ip address 163.10.11.2/30
+ ip ospf dead-interval 6
+ ip ospf hello-interval 2
+ ip ospf network point-to-point
+!
+interface eth1
+ ip address 181.29.150.10/30
+ ip ospf dead-interval 6
+ ip ospf hello-interval 2
+ ip ospf network point-to-point
+!
+interface eth2
+ ip address 181.29.150.18/30
+ ip ospf dead-interval 6
+ ip ospf hello-interval 2
+ ip ospf network point-to-point
+!
+interface eth3
+ ip address 181.29.150.2/30
+ ip ospf dead-interval 6
+ ip ospf hello-interval 2
+ ip ospf network point-to-point
+!
+interface eth4
+ ip address 10.0.0.1/24
+ ip ospf dead-interval 6
+ ip ospf hello-interval 2
+ ip ospf network point-to-point
+ ipv6 address 2001::1/64
+!
+router ospf
+ ospf router-id 163.10.11.2
+ network 10.0.0.1/24 area 0.0.0.0
+ network 163.10.11.2/30 area 0.0.0.0
+ network 181.29.150.2/30 area 0.0.0.0
+ network 181.29.150.10/30 area 0.0.0.0
+ network 181.29.150.18/30 area 0.0.0.0
+!
+router ospf6
+ router-id 163.10.11.2
+ instance-id 65
+ interface eth0 area 0.0.0.0
+ interface eth1 area 0.0.0.0
+ interface eth2 area 0.0.0.0
+ interface eth3 area 0.0.0.0
+ interface eth4 area 0.0.0.0
+!
+ip forwarding
+ipv6 forwarding
+!
+line vty
+!
+end

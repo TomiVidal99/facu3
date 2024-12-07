@@ -1,0 +1,27 @@
+!
+!
+service integrated-vtysh-config
+!
+debug ospf6 lsa unknown
+!
+interface eth0
+ ip address 163.10.11.1/30
+ ip ospf dead-interval 6
+ ip ospf hello-interval 2
+ ip ospf network point-to-point
+!
+router ospf
+ ospf router-id 163.10.11.1
+ network 163.10.11.1/30 area 0.0.0.0
+!
+router ospf6
+ router-id 163.10.11.1
+ instance-id 65
+ interface eth0 area 0.0.0.0
+!
+ip forwarding
+ipv6 forwarding
+!
+line vty
+!
+end

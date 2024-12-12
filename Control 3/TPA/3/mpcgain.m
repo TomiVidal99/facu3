@@ -1,5 +1,5 @@
 % function [Phi_Phi,Phi_F,Phi_R,A_e, B_e,C_e] = mpcgain(Ap,Bp,Cp,Nc,Np);
-function [Phi_Phi,Phi_F,Phi_R,A_e, B_e,C_e] = mpcgain(A_e, B_e, C_e ,Nc,Np);
+function [Phi_Phi,Phi_F,Phi_R,A_e, B_e,C_e] = mpcgain(A_e, B_e, C_e ,Nc,Np,reference);
 
     % [m1,n1]=size(Cp);
     % [n1,n_in]=size(Bp);
@@ -26,7 +26,7 @@ function [Phi_Phi,Phi_F,Phi_R,A_e, B_e,C_e] = mpcgain(A_e, B_e, C_e ,Nc,Np);
     for i=2:Nc
         Phi(:,i)=[zeros(i-1,1);v(1:Np-i+1,1)]; %Toeplitz matrix
     end
-    BarRs=ones(Np,1);
+    BarRs=reference*ones(Np,1)
     Phi_Phi= Phi'*Phi;
     Phi_F= Phi'*F;
     Phi_R=Phi'*BarRs;

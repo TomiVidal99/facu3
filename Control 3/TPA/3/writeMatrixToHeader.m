@@ -5,7 +5,7 @@ function writeMatrixToHeader(matrix, filename, array_name)
     %   filename    - Name of the output .h file (e.g., 'matrix_data.h')
     %   array_name  - Name of the C array (e.g., 'my_matrix')
     
-    fid = fopen(filename, 'w');
+    fid = fopen(strcat('codigo/include/', filename), 'w');
     
     if fid == -1
         error('Error opening the file: %s', filename);
@@ -38,5 +38,5 @@ function writeMatrixToHeader(matrix, filename, array_name)
     fprintf(fid, '#endif // %s\n', guard);
     
     fclose(fid);
-    fprintf('Matrix exported successfully to %s as %s.\n', filename, array_name);
+    fprintf('Matriz exportada desde %s hasta %s.\n', filename, array_name);
 end

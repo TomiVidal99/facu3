@@ -3,7 +3,6 @@
  <FRAME activewindow="0">
   <PLACEMENT>2c0000000200000003000000ffffffffffffffffffffffffffffffff8c0000000d000000f40600002b040000</PLACEMENT>
   <WINDOW type="default" module="ISIS"/>
-  <WINDOW binding="1" type="GRAPH" module="ISIS"/>
  </FRAME>
  <MODULE name="VSMDEBUG">
   <PWI>
@@ -99,7 +98,7 @@
      <ITEM name="TopLineAddress">00000020</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="484" x="298" flags="00008023" y="105" h="853" pid="0" iid="1">
+   <POPUP w="972" x="157" flags="00008023" y="138" h="853" pid="0" iid="1">
     <PROPERTIES>
      <ITEM name="AutoEcho">0</ITEM>
      <ITEM name="HexMode">0</ITEM>

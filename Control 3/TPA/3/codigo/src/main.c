@@ -29,14 +29,18 @@
 
 char *debug_output = "TEST\n";
 
-volatile uint16_t timer0_counter;
-volatile uint8_t temp_counter;
+volatile uint8_t timer0_counter = 0;
+volatile uint8_t temp_counter = 0;
 
-volatile int32_t states[STATES_NUM] = {0, 0, 0, 0, 0, 0};
-volatile int32_t reference = 1000;
-volatile uint32_t control_action = 0;
+volatile uint16_t states[STATES_NUM] = {0, 0, 0, 0, 0, 0, 0};
+volatile uint16_t reference = 1000;
+volatile uint16_t control_action = 0;
 volatile int32_t control_action_diff = 0;
 volatile uint8_t btn_timeout = 0;
+
+volatile uint32_t a = 0;
+
+volatile uint16_t u = 0;
 
 int main(void)
 {
@@ -145,10 +149,6 @@ uint8_t read_btn()
 void read_adcs()
 {
 
-  // TODO: esto debería ser así????
-  // como es el valor del primer estado?
-  states[6] = control_action;
-
   for (temp_counter = 0; temp_counter < ADC_NUMBERS; temp_counter++)
   {
     ADMUX = (ADMUX & 0xF0) | (temp_counter & 0x0F); // selecciono el ADC
@@ -166,9 +166,20 @@ void read_adcs()
     }
     else
     {
-      states[temp_counter + 1] = (uint16_t)((4.88 * ADC) + 1);
+      if (temp_counter == 6)
+      {
+        USART_putstring("se lee el adc 6!!!\r\n");
+      }
+      else
+      {
+        states[temp_counter] = (uint16_t)((4.88 * ADC) + 1);
+      }
     }
   }
+
+  // TODO: esto debería ser así????
+  // states[6] = control_action;
+  states[6] = 0;
 }
 
 ISR(TIMER0_COMPA_vect)
@@ -185,19 +196,18 @@ ISR(TIMER0_COMPA_vect)
   PORTB ^= (1 << PB4);
 }
 
-volatile uint32_t u = 0;
 void control_MPC()
 {
-  for (temp_counter = 0; temp_counter < STATES_NUM; temp_counter++)
-  {
-    control_action_diff += (Kmpc[0][temp_counter] * states[temp_counter]);
-  }
-  control_action_diff = Ky[0][0] * reference - control_action_diff;
-  control_action = control_action + control_action_diff;
+  // for (temp_counter = 0; temp_counter < STATES_NUM; temp_counter++)
+  // {
+  //   control_action_diff += (Kmpc[0][temp_counter] * states[temp_counter]);
+  // }
+  // control_action_diff = Ky[0][0] * reference - control_action_diff;
+  // control_action = control_action + control_action_diff;
 
-  u = (uint32_t)((control_action/50000));
-  set_pwm_duty_cycle(u);
+  // u = (uint32_t)((control_action/50000));
+  // set_pwm_duty_cycle(u);
 
-  sprintf(debug_output, "u: %ld\n\r", u);
+  sprintf(debug_output, "estados: %d, %d, %d, %d, %d, %d, %d. CA: %ld\n\r", states[0], states[1], states[2], states[3], states[4], states[5], states[6], a);
   USART_putstring(debug_output);
 }

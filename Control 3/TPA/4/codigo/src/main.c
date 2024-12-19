@@ -1,8 +1,5 @@
 /*
  * main.c
- * TPA3
- *
- * Se implementa un controlador por MPC
  */
 
 #ifndef F_CPU
@@ -20,30 +17,19 @@
 #include "definitions.h"
 #include "uart.h"
 
-// matrices de los datos
-#include "Kmpc.h"
-#include "Ky.h"
-
-#define STATES_NUM 7
-#define ADC_NUMBERS 6
-
-char *debug_output = "TEST\n";
+#define REFERENCE 2.5
+#define HISTERESIS 0.8973
+// #define HISTERESIS 0.05
 
 volatile uint16_t timer0_counter;
-volatile uint8_t temp_counter;
-
-volatile int32_t states[STATES_NUM] = {0, 0, 0, 0, 0, 0};
-volatile int32_t reference = 1000;
-volatile uint32_t control_action = 0;
-volatile int32_t control_action_diff = 0;
-volatile uint8_t btn_timeout = 0;
+uint16_t system_output_mv = 0;
+char *debug_output = "TEST\n";
 
 int main(void)
 {
-  init_adcs();
+  init_adc5();
   init_timer1();
   init_timer0();
-  init_btn();
   USART_init();
   sei();
 
@@ -52,10 +38,11 @@ int main(void)
 
   // set_sleep_mode(SLEEP_MODE_PWR_DOWN); // Modo de bajo consumo: power-down
 
-  set_pwm_duty_cycle(0);
+  set_pwm_duty_cycle(90);
 
   while (1)
   {
+    // sleep_mode();
   }
   return 0;
 }
@@ -88,116 +75,56 @@ void set_pwm_duty_cycle(uint8_t duty_cycle)
   OCR1A = (uint16_t)(((uint32_t)duty_cycle * (ICR1 + 1)) / 100);
 }
 
+volatile float calc = 0;
 ISR(TIMER1_OVF_vect)
 {
-  if (btn_timeout > 0)
-    btn_timeout--;
-
-  // leo el boton para cambiar la referencia
-  if (read_btn() == 1 && btn_timeout == 0)
-  {
-    if (reference == 1)
-    {
-      reference = 3;
-    }
-    else
-    {
-      reference = 1;
-    }
-
-    // sprintf(debug_output, "referencia: %ld\n\r", reference);
-    // USART_putstring(debug_output);
-
-    btn_timeout = 2;
-  }
-
-  read_adcs();
-  control_MPC();
-
   // esta es una señal de referencia para saber cuando
   // se hace la interrupcion cada 1ms
   PORTB ^= (1 << PB6);
 
-  // sprintf(debug_output, "MPC: %d\n\r", system_output_mv);
-  // USART_putstring(debug_output);
+  read_adc5();
+
+  calc = (float)(system_output_mv / 1000.0) - REFERENCE;
+  if (calc < -HISTERESIS)
+  {
+    set_pwm_duty_cycle(100);
+  }
+  else if (calc > HISTERESIS)
+  {
+    set_pwm_duty_cycle(0);
+  }
 }
 
-void init_adcs()
+void init_adc5()
 {
   ADMUX = (1 << REFS0);
-  // ADMUX |= (1 << MUX2) | (1 << MUX0);
+  ADMUX |= (1 << MUX2) | (1 << MUX0);
   ADCSRA |= (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1);
+
+  // se hace una lectura para finalizar el seteo del registro
+  ADCSRA |= (1 << ADSC);
+  while ((ADCSRA & (1 << ADSC)) != 0)
+    ;
 }
 
-void init_btn()
+void read_adc5()
 {
-  DDRD &= ~(1 << DDD3);
-  PORTD |= (1 << PORTD3);
-}
-
-// Return 1 a GND
-// Return 0 a HIGH
-uint8_t read_btn()
-{
-  return !(PIND & (1 << PIND3));
-}
-
-void read_adcs()
-{
-
-  // TODO: esto debería ser así????
-  // como es el valor del primer estado?
-  states[6] = control_action;
-
-  for (temp_counter = 0; temp_counter < ADC_NUMBERS; temp_counter++)
+  ADCSRA |= (1 << ADSC);
+  while (ADCSRA & (1 << ADSC))
   {
-    ADMUX = (ADMUX & 0xF0) | (temp_counter & 0x0F); // selecciono el ADC
-    ADCSRA |= (1 << ADSC);
-    while (ADCSRA & (1 << ADSC))
-    {
-    };
-    if (temp_counter == 0)
-    {
-      states[1] = (uint16_t)((4.88 * ADC) + 1);
-    }
-    else if (temp_counter == 1)
-    {
-      states[0] = (uint16_t)((4.88 * ADC) + 1);
-    }
-    else
-    {
-      states[temp_counter + 1] = (uint16_t)((4.88 * ADC) + 1);
-    }
-  }
+  };
+  system_output_mv = (uint16_t)((4.88 * ADC) + 1);
 }
 
 ISR(TIMER0_COMPA_vect)
 {
   timer0_counter++;
-  if (timer0_counter < 200)
+  if (timer0_counter < 1000)
   {
     return;
   }
   timer0_counter = 0;
-
-  // sprintf(debug_output, "lectura: %d\n\r", system_output_mv);
-  // USART_putstring(debug_output);
-  PORTB ^= (1 << PB4);
-}
-
-volatile uint32_t u = 0;
-void control_MPC()
-{
-  for (temp_counter = 0; temp_counter < STATES_NUM; temp_counter++)
-  {
-    control_action_diff += (Kmpc[0][temp_counter] * states[temp_counter]);
-  }
-  control_action_diff = Ky[0][0] * reference - control_action_diff;
-  control_action = control_action + control_action_diff;
-
-  u = (uint32_t)((control_action/50000));
-  set_pwm_duty_cycle(u);
-
-  sprintf(debug_output, "u: %ld\n\r", u);
+  sprintf(debug_output, "lectura: %d\n\r", system_output_mv);
   USART_putstring(debug_output);
+  PORTB ^= (1 << PB4);
 }

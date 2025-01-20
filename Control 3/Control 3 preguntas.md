@@ -1,0 +1,2 @@
+- [ ] Qué son los parámetros distribuidos?
+- [ ] a qué se refiere con modelos no paramétricos? cuáles serían?

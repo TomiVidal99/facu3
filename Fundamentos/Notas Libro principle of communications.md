@@ -27,7 +27,28 @@ $$ B_{N} = \frac{1}{2H_{0}}\int_{-\infty}^{+\infty}|H(f)|^{2}df $$
 ## importante: aclarar que esto es para cuando se considera bilateral (para unilateral solamente sacar el 2)
 
 # Ruido térmico
-
+(Se considera que el espectro es simétrico, osea bilateral)
 Se analiza a partir de su potencia media normalizada:
-$$ V_{rms}^{2}= <V_{n}^{2}(t)>=4kTRB[V^2]$$
-$$ i_{rms}^{2}= \frac{<V_{n}^{2}(t)>}{R^{2}}=4kTGB[A^2]$$
+$$ V_{rms}^{2}= <V_{n}^{2}(t)>=4kTRB\ [V^2]$$
+$$ i_{rms}^{2}= \frac{<V_{n}^{2}(t)>}{R^{2}}=4kTGB\ [A^2]$$
+# Ruido shot
+### Polarización directa
+$$i_{rms}^{2}=2eI_{t}B\ [A^2]$$
+$I_{t}=I+2I_{s}$ , Donde $I_{s}$ es la corriente de saturación inversa.
+### Polarización directa
+$$i_{rms}^{2}=2eI_{s}B\ [A^2]$$
+### Pequeña señal
+$$i_{rms}^{2}=2kTg_{0}B\ [A^{2}]$$
+
+# Potencia disponible
+Cuando hay matcheo de impedancias se da que la potencia máxima transferida es la mitad, por lo que: $P_{a} =\frac{1}{2}P$ o lo que es equivalente: $P_{a}=\frac{1}{R}(\frac{1}{2}V_{rms})^{2}=\frac{V_{rms}^{2}}{4R}$
+
+# DEP disponible
+La DEP disponible unilateral a $T=T_{0}=290°K$
+$$S_{a}(f)\cong-204\frac{dBW}{Hz}=-174\frac{dBm}{Hz}$$
+# Temperatura equivalente de ruido
+Para cualquier fuente de DEP constante se define la temperatura equivalente de ruido:
+$$T_{e}=\frac{P_{a}}{kB}\ [°K]$$
+Y si la fuente de ruido no es de DEP constante:
+$$T_{e}=\frac{2S_{a}(f)}{k}\ [°K]$$
+

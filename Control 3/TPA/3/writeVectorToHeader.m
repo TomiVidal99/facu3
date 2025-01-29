@@ -1,4 +1,4 @@
-function writeMatrixToHeader(matrix, filename, array_name)
+function writeVectorToHeader(vector, filename, array_name)
     % Function to write a MATLAB matrix to a .h file as a C array.
     % Inputs:
     %   matrix      - The matrix to export
@@ -14,22 +14,14 @@ function writeMatrixToHeader(matrix, filename, array_name)
     guard = upper(strrep(filename, '.', '_'));
     fprintf(fid, '#ifndef %s\n#define %s\n\n', guard, guard);
     
-    [rows, cols] = size(matrix);
-    fprintf(fid, 'const int %s[%d][%d] = {\n', array_name, rows, cols);
+    vector_length = length(vector);
+    fprintf(fid, 'const float %s[%d] = {', array_name, vector_length);
     
-    for i = 1:rows
-        fprintf(fid, '    {');
-        for j = 1:cols
-            if j < cols
-                fprintf(fid, '%g, ', matrix(i, j));
-            else
-                fprintf(fid, '%g', matrix(i, j));
-            end
-        end
-        if i < rows
-            fprintf(fid, '},\n');
+    for i = 1:vector_length
+        if i < vector_length
+            fprintf(fid, '%g, ', vector(i));
         else
-            fprintf(fid, '}\n');
+            fprintf(fid, '%g', vector(i));
         end
     end
     

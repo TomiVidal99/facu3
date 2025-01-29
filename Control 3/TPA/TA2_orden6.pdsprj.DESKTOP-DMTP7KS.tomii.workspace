@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
- <FRAME activewindow="1">
+ <FRAME activewindow="0">
   <PLACEMENT>2c0000000200000003000000ffffffffffffffffffffffffffffffff000000002b000000c603000038040000</PLACEMENT>
   <WINDOW type="default" module="ISIS">
-   <editor metric="0" gridmajor="25400000" mode="00000080" zoom="0" scale="64" flipped="0" gridminor="508000" gridmode="32" snapidx="2" snap="254000" xcursor="0" orgmode="0" snaprange="198437">
+   <editor metric="0" gridmajor="2540000" mode="00000000" zoom="0" scale="145" flipped="0" gridminor="254000" gridmode="32" snapidx="2" snap="254000" xcursor="32" orgmode="1" snaprange="127000">
     <world y1="-26670000" x1="-40640000" y2="26670000" x2="40640000"/>
-    <centre x="-17731494" y="-11758082"/>
-    <origin x="0" y="0"/>
+    <centre x="-21046967" y="-797034"/>
+    <origin x="-35814000" y="2286000"/>
    </editor>
   </WINDOW>
   <WINDOW binding="0" type="GRAPH" module="ISIS"/>
@@ -19,17 +19,17 @@
   </editor>
  </MODULE>
  <MODULE name="ISIS">
-  <editor metric="0" gridmajor="25400000" mode="00000080" zoom="0" scale="64" flipped="0" gridminor="508000" gridmode="32" snapidx="2" snap="254000" xcursor="0" orgmode="0" snaprange="198437">
+  <editor metric="0" gridmajor="2540000" mode="00000000" zoom="0" scale="145" flipped="0" gridminor="254000" gridmode="32" snapidx="2" snap="254000" xcursor="32" orgmode="1" snaprange="127000">
    <world y1="-26670000" x1="-40640000" y2="26670000" x2="40640000"/>
-   <centre x="-17731494" y="-11758082"/>
-   <origin x="0" y="0"/>
+   <centre x="-21046967" y="-797034"/>
+   <origin x="-35814000" y="2286000"/>
   </editor>
  </MODULE>
  <MODULE name="VSMDEBUG">
   <PWI>
-   <POPUP w="800" x="38" flags="00000003" y="129" h="200" pid="0" iid="-1">
+   <POPUP w="800" x="38" flags="00000002" y="129" h="200" pid="0" iid="-1">
     <PROPERTIES>
-     <ITEM name="Message Column Width">542</ITEM>
+     <ITEM name="Message Column Width">663</ITEM>
      <ITEM name="ShowGrid">No</ITEM>
      <ITEM name="Source Column Width">100</ITEM>
      <ITEM name="Time Column Width">120</ITEM>
@@ -53,10 +53,10 @@
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1384" x="535" flags="00000000" y="130" h="877" pid="0" iid="25">
+   <POPUP w="1384" x="536" flags="00000001" y="203" h="877" pid="0" iid="25">
     <PROPERTIES/>
    </POPUP>
-   <POPUP w="450" x="1347" flags="00008023" y="240" h="805" pid="0" iid="1">
+   <POPUP w="752" x="981" flags="00008023" y="52" h="1004" pid="0" iid="1">
     <PROPERTIES>
      <ITEM name="AutoEcho">0</ITEM>
      <ITEM name="HexMode">0</ITEM>

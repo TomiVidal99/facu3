@@ -28,65 +28,18 @@
 #define ADC_NUMBERS 6
 
 // volatile uint16_t timer0_counter = 0;
-volatile float states[STATES_NUM] = {
-    1690 / 1000.0,
-    484 / 1000.0,
-    98 / 1000.0,
-    20 / 1000.0,
-    5 / 1000.0,
-    5 / 1000.0,
-    3817 / 1000.0};
-volatile float control_action = 0.0;
+volatile uint32_t states[STATES_NUM] = {0};
+volatile uint16_t control_action = 0;
 char *debug_output = "test\n\r";
-volatile uint8_t reference = 1;
+volatile uint16_t reference = 2000;
 
 int main(void)
 {
-
   init_adcs();
   init_timer1();
-  // init_timer0();
+  init_button_interrupt();
   USART_init();
   sei();
-
-  // uint8_t temp_counter = 0;
-  // float temp_acc = 0.0;
-  // float control_action_diff = 0.0;
-  // float temp_ca = 0.0;
-
-  // for (temp_counter = 0; temp_counter < STATES_NUM; temp_counter++)
-  // {
-  //   temp_acc += ((float)Kmpc[temp_counter] * (float)states[temp_counter]);
-  // }
-  // control_action_diff = (((float)Ky * (float)reference) - temp_acc); // dU
-  // temp_ca += control_action_diff;                                    // U
-
-  // temp_acc += 0.0766301 * (float)1690 / 1000.0;
-  // temp_acc += -0.338912 * (float)484 / 1000.0;
-  // temp_acc += 0.599917 * (float)98 / 1000.0;
-  // temp_acc += -0.531259 * (float)20 / 1000.0;
-  // temp_acc += 0.235353 * (float)5 / 1000.0;
-  // temp_acc += -0.041726 * (float)5 / 1000.0;
-  // temp_acc += 0.41106 * (float)3817 / 1000.0;
-
-  // sprintf(debug_output, "acc: %d, diff: %d, temp_ca: %d\n\r",
-  //         (uint16_t)(temp_acc * 1000.0),
-  //         (uint16_t)(control_action_diff * 1000.0),
-  //         (uint16_t)(temp_ca * 1000.0));
-  // sprintf(debug_output, "a: %d, dU: %d, U: %d, acc: %d, DC: %d%% \r\n\tStates->(%d,%d,%d,%d,%d,%d,%d)\r\n\r\n",
-  //         a,
-  //         (uint16_t)(control_action_diff * 1000.0),
-  //         (uint16_t)(temp_ca * 1000.0),
-  //         (uint8_t)(temp_acc * 1000.0),
-  //         (uint8_t)((temp_ca * 100.0) / (5.0)),
-  //         (uint16_t)(1000.0 * states[0]),
-  //         (uint16_t)(1000.0 * states[1]),
-  //         (uint16_t)(1000.0 * states[2]),
-  //         (uint16_t)(1000.0 * states[3]),
-  //         (uint16_t)(1000.0 * states[4]),
-  //         (uint16_t)(1000.0 * states[5]),
-  //         (uint16_t)(1000.0 * states[6]));
-  // USART_putstring(debug_output);
 
   set_pwm_duty_cycle(0);
 
@@ -100,32 +53,29 @@ int main(void)
 
 ISR(TIMER1_OVF_vect)
 {
-  float control_action_diff = 0.0;
-  uint8_t temp_counter1 = 0;
-  uint8_t temp_counter2 = 0;
-  float temp_ca = 0.0;
-  float temp_acc = 0.0;
+  int32_t temp_ca = 0;
+  uint8_t temp_counter = 0;
 
   // Lectura de los estados
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  for (temp_counter1 = 0; temp_counter1 < ADC_NUMBERS; temp_counter1++)
+  for (temp_counter = 0; temp_counter < ADC_NUMBERS; temp_counter++)
   {
-    ADMUX = (ADMUX & 0xF0) | (temp_counter1 & 0x0F); // selecciono el ADC
+    ADMUX = (ADMUX & 0xF0) | (temp_counter & 0x0F); // selecciono el ADC
     ADCSRA |= (1 << ADSC);
     while (ADCSRA & (1 << ADSC))
     {
     };
-    if (temp_counter1 == 0)
+    if (temp_counter == 0)
     {
-      states[1] = (uint16_t)((5.0 * ADC) + 1) / 1024.0;
+      states[1] = (uint16_t)(((4.88 * ADC) + 1));
     }
-    else if (temp_counter1 == 1)
+    else if (temp_counter == 1)
     {
-      states[0] = (uint16_t)((5.0 * ADC) + 1) / 1024.0;
+      states[0] = (uint16_t)(((4.88 * ADC) + 1));
     }
     else
     {
-      states[temp_counter1] = (uint16_t)((5.0 * ADC) + 1) / 1024.0;
+      states[temp_counter] = (uint16_t)(((4.88 * ADC) + 1));
     }
   }
   states[6] = control_action;
@@ -133,43 +83,33 @@ ISR(TIMER1_OVF_vect)
 
   // CONTROL MPC
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  for (temp_counter2 = 0; temp_counter2 < STATES_NUM; temp_counter2++)
-  {
-    sprintf(debug_output, "tc2: %d\n\r\tkmpc: %d\n\r\tstates: %d\n\r",
-            temp_counter2,
-            (uint16_t)(Kmpc[temp_counter2] * 1000.0),
-            (uint16_t)(states[temp_counter2] * 1000.0));
-    USART_putstring(debug_output);
-    temp_acc = (float)((float)temp_acc + ((float)Kmpc[temp_counter2] * (float)states[temp_counter2]));
-  }
-  control_action_diff = (((float)Ky * (float)reference) - temp_acc); // dU
-  temp_ca += control_action_diff;                                    // U
+  temp_ca = temp_ca + (int32_t)(((int32_t)Ky * (int32_t)(reference / (int32_t)2)) - (int32_t)((Kmpc[0] * (double)states[0]) + (Kmpc[1] * (double)states[1]) + (Kmpc[2] * (double)states[2]) + (Kmpc[3] * (double)states[3]) + (Kmpc[4] * (double)states[4]) + (Kmpc[5] * (double)states[5]) + (Kmpc[6] * (double)states[6]))); // dU
 
   // limito la accion de control
-  if (temp_ca > 5.0)
+  if (temp_ca > 5000)
   {
-    temp_ca = 5.0;
+    temp_ca = 5000;
   }
-  else if (temp_ca < 0.0)
+  else if (temp_ca < 0)
   {
-    temp_ca = 0.0;
+    temp_ca = 0;
   }
 
-  set_pwm_duty_cycle((temp_ca * 100.0) / 5.0);
+  set_pwm_duty_cycle((uint8_t)(((uint32_t)temp_ca * (uint32_t)100) / (uint32_t)5000));
 
-  sprintf(debug_output, "dU: %d, U: %d, acc: %d, DC: %d%% \r\n\tStates->(%d,%d,%d,%d,%d,%d,%d)\r\n\r\n",
-          (uint16_t)(control_action_diff * 1000.0),
-          (uint16_t)(temp_ca * 1000.0),
-          (uint8_t)(temp_acc * 1000.0),
-          (uint8_t)((temp_ca * 100.0) / (5.0)),
-          (uint16_t)(1000.0 * states[0]),
-          (uint16_t)(1000.0 * states[1]),
-          (uint16_t)(1000.0 * states[2]),
-          (uint16_t)(1000.0 * states[3]),
-          (uint16_t)(1000.0 * states[4]),
-          (uint16_t)(1000.0 * states[5]),
-          (uint16_t)(1000.0 * states[6]));
-  USART_putstring(debug_output);
+  // sprintf(debug_output, "dU: %ld, U: %ld, acc: %ld, DC: %d%% \r\n\tStates->(%ld,%ld,%ld,%ld,%ld,%ld,%ld)\r\n\r\n",
+  //         control_action_diff,
+  //         temp_ca,
+  //         temp_acc,
+  //         u,
+  //         states[0],
+  //         states[1],
+  //         states[2],
+  //         states[3],
+  //         states[4],
+  //         states[5],
+  //         states[6]);
+  // USART_putstring(debug_output);
 
   control_action = temp_ca;
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -202,55 +142,44 @@ void init_adcs()
   ADCSRA |= (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1);
 }
 
-// ISR(TIMER0_COMPA_vect)
-// {
-//   // timer0_counter++;
-//   // if (timer0_counter < 3000)
-//   // {
-//   //   return;
-//   // }
-//   // timer0_counter = 0;
+// habilita la interrupción de PD1 (boton en la placa)
+void init_button_interrupt()
+{
+  DDRD &= ~(1 << PD3);
+  PORTD |= (1 << PD3);
+  EICRA |= (1 << ISC11);
+  EICRA &= ~(1 << ISC10);
+  EIMSK |= (1 << INT1);
+}
 
-//   // if (reference == 1)
-//   // {
-//   //   reference = 3;
-//   // }
-//   // else
-//   // {
-//   //   reference = 1;
-//   // }
-
-//   // sprintf(debug_output, "reference: %d\n\r", reference);
-//   // USART_putstring(debug_output);
-
-//   // PORTB ^= (1 << PB4);
-// }
-
-// void init_timer0()
-// {
-//   TCCR0A = (1 << WGM01); // CTC mode
-//   TCCR0B = (1 << CS01) | (1 << CS00);
-//   OCR0A = 249;
-//   TIMSK0 = (1 << OCIE0A);
-// }
-
-// 1ms
-// void init_timer1()
-// {
-//   DDRB |= (1 << PB1);
-//   TCCR1A = (1 << COM1A1) | (1 << WGM11);
-//   TCCR1B = (1 << WGM13) | (1 << WGM12) | (1 << CS10);
-//   ICR1 = 15999;
-
-//   TIMSK1 = (1 << TOIE1);
-// }
-
-// 100ms
-// void init_timer1()
-// {
-//   DDRB |= (1 << PB1);
-//   TCCR1A = (1 << COM1A1) | (1 << WGM11);                            // Clear OC1A on compare match, Fast PWM
-//   TCCR1B = (1 << WGM13) | (1 << WGM12) | (1 << CS11) | (1 << CS10); // Fast PWM, prescaler = 64
-//   ICR1 = 24999;
-//   TIMSK1 = (1 << TOIE1);
-// }
+// Cuando se presiona el botton
+ISR(INT1_vect)
+{
+  _delay_ms(50);
+  if (!(PIND & (1 << PD3)))
+  {
+    switch (reference)
+    {
+    case 1000:
+      reference = 2000;
+      break;
+    case 2000:
+      reference = 3000;
+      break;
+    case 3000:
+      reference = 4000;
+      break;
+    case 4000:
+      reference = 5000;
+      break;
+    case 5000:
+      reference = 1000;
+      break;
+    default:
+      reference = 1000;
+      break;
+    }
+    sprintf(debug_output, "button pressed\n\r");
+    USART_putstring(debug_output);
+  }
+}

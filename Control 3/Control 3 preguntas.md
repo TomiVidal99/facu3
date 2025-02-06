@@ -1,5 +1,6 @@
 REPASAR NYQUIST
 
+- [ ] Cuando habla de Pn, P, Gn, qué son cada uno, porque las notaciones varían bastante
 - [ ] Qué son los parámetros distribuidos?
 - [ ] a qué se refiere con modelos no paramétricos? cuáles serían?
 

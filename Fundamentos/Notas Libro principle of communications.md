@@ -52,3 +52,21 @@ $$T_{e}=\frac{P_{a}}{kB}\ [°K]$$
 Y si la fuente de ruido no es de DEP constante:
 $$T_{e}=\frac{2S_{a}(f)}{k}\ [°K]$$
 
+
+# VCO
+![[FdCom_Com_29102024.pdf#page=6&rect=414,150,698,249|FdCom_Com_29102024, p.6]]
+![[FdCom_Com_29102024.pdf#page=6&rect=90,38,357,155|FdCom_Com_29102024, p.6]]
+![[FdCom_Com_29102024.pdf#page=6&rect=553,28,692,88|FdCom_Com_29102024, p.6]]
+
+# PLL
+En condiciones de enganche o cercanas a ella:
+![[FdCom_Com_29102024.pdf#page=7&rect=127,161,761,400|FdCom_Com_29102024, p.7]]
+
+## Modelo lineal
+![[FdCom_Com_29102024.pdf#page=7&rect=75,37,310,102|FdCom_Com_29102024, p.7]]
+![[FdCom_Com_29102024.pdf#page=8&rect=37,291,833,390|FdCom_Com_29102024, p.8]]
+
+Si aumento el rango de captura del PLL tengo más ancho de banda equivalente de ruido 
+![[FdCom_Com_29102024.pdf#page=13&rect=34,74,909,416|FdCom_Com_29102024, p.13]]
+
+## Modelo de orden 2

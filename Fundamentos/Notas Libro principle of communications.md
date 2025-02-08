@@ -70,3 +70,10 @@ Si aumento el rango de captura del PLL tengo más ancho de banda equivalente de 
 ![[FdCom_Com_29102024.pdf#page=13&rect=34,74,909,416|FdCom_Com_29102024, p.13]]
 
 ## Modelo de orden 2
+
+- TODO
+
+
+# Modulación de pulsos
+
+w

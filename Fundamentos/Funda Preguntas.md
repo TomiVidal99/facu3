@@ -1,3 +1,4 @@
+- [ ] por que detector de envolvente en AM con coherente y no coherente?
 - [ ] Transformada de Hilbert: para qué sirve y cómo es?
 - [ ] Practicar las integrales del TP1
 - [ ] Cómo calcular la DEP con la TF de x(t)? porque quedan deltas y no se cómo interpretar la energía que dan

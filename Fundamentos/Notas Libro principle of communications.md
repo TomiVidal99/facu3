@@ -73,7 +73,26 @@ Si aumento el rango de captura del PLL tengo más ancho de banda equivalente de 
 
 - TODO
 
+# Retardo y fase de grupo
+![[FdCom_Com_12112024.pdf#page=5&rect=58,349,552,427|FdCom_Com_12112024, p.5]]
+Y el de grupo como:
+![[FdCom_Com_12112024.pdf#page=5&rect=383,28,598,93|FdCom_Com_12112024, p.5]]
+
+## Ejemplo de uso:
+![[FdCom_Com_12112024.pdf#page=6&rect=50,20,934,430|FdCom_Com_12112024, p.6]]
 
 # Modulación de pulsos
+A partir del teorema de muestreo: podemos representar a una señal de banda limitada B, por sus muestras tomadas a $f_{s}>2B$
+![[FdCom_Com_14112024.pdf#page=3&rect=550,32,906,442|FdCom_Com_14112024, p.3]]
 
-w
+Cuantización uniforme con paso de cuantización s con número de niveles:
+$$s=\frac{V_{H}-V_{L}}{M}$$
+![[FdCom_Com_14112024.pdf#page=5&rect=485,127,925,326|FdCom_Com_14112024, p.5]]
+
+## Energía de ruido de cuantización:
+$$P_{e}=\frac{s^{2}}{12}$$
+![[FdCom_Com_14112024.pdf#page=7&rect=46,39,890,292|FdCom_Com_14112024, p.7]]
+
+## Ancho de banda (bitrate)
+![[FdCom_Com_14112024.pdf#page=8&rect=70,52,647,122|FdCom_Com_14112024, p.8]]
+

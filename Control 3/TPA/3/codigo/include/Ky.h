@@ -3,6 +3,6 @@
 #ifndef KY_H
 #define KY_H
 
-const float Ky = 3.388893e+00;
+const float Ky = 3.388893;
 
 #endif // KY_H

@@ -83,7 +83,7 @@ ISR(TIMER1_OVF_vect)
 
   // CONTROL MPC
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  temp_ca = temp_ca + (int32_t)(((int32_t)Ky * (int32_t)(reference / (int32_t)2)) - (int32_t)((Kmpc[0] * (double)states[0]) + (Kmpc[1] * (double)states[1]) + (Kmpc[2] * (double)states[2]) + (Kmpc[3] * (double)states[3]) + (Kmpc[4] * (double)states[4]) + (Kmpc[5] * (double)states[5]) + (Kmpc[6] * (double)states[6]))); // dU
+  temp_ca = temp_ca + (int32_t)(((int32_t)Ky * (double)(reference)) - (int32_t)((Kmpc[0] * (double)states[0]) + (Kmpc[1] * (double)states[1]) + (Kmpc[2] * (double)states[2]) + (Kmpc[3] * (double)states[3]) + (Kmpc[4] * (double)states[4]) + (Kmpc[5] * (double)states[5]) + (Kmpc[6] * (double)states[6]))); // dU
 
   // limito la accion de control
   if (temp_ca > 5000)
@@ -95,7 +95,7 @@ ISR(TIMER1_OVF_vect)
     temp_ca = 0;
   }
 
-  set_pwm_duty_cycle((uint8_t)(((uint32_t)temp_ca * (uint32_t)100) / (uint32_t)5000));
+  set_pwm_duty_cycle((uint8_t)(((uint32_t)temp_ca * (uint32_t)100) / (uint32_t)20000));
 
   // sprintf(debug_output, "dU: %ld, U: %ld, acc: %ld, DC: %d%% \r\n\tStates->(%ld,%ld,%ld,%ld,%ld,%ld,%ld)\r\n\r\n",
   //         control_action_diff,

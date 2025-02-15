@@ -21,8 +21,7 @@
 #include "uart.h"
 
 // matrices de los datos
-#include "Kmpc.h"
-#include "Ky.h"
+#include "weights.h"
 
 #define STATES_NUM 7
 #define ADC_NUMBERS 6
@@ -31,7 +30,7 @@
 volatile uint32_t states[STATES_NUM] = {0};
 volatile uint16_t control_action = 0;
 char *debug_output = "test\n\r";
-volatile uint16_t reference = 2000;
+volatile uint16_t reference = 2500;
 
 int main(void)
 {
@@ -54,6 +53,7 @@ int main(void)
 ISR(TIMER1_OVF_vect)
 {
   int32_t temp_ca = 0;
+  uint8_t u = 0;
   uint8_t temp_counter = 0;
 
   // Lectura de los estados
@@ -83,7 +83,7 @@ ISR(TIMER1_OVF_vect)
 
   // CONTROL MPC
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  temp_ca = temp_ca + (int32_t)(((int32_t)Ky * (double)(reference)) - (int32_t)((Kmpc[0] * (double)states[0]) + (Kmpc[1] * (double)states[1]) + (Kmpc[2] * (double)states[2]) + (Kmpc[3] * (double)states[3]) + (Kmpc[4] * (double)states[4]) + (Kmpc[5] * (double)states[5]) + (Kmpc[6] * (double)states[6]))); // dU
+  temp_ca = control_action + (int32_t)(((double)Ky * (double)(reference)) - (int32_t)((Kmpc[0] * (double)states[0]) + (Kmpc[1] * (double)states[1]) + (Kmpc[2] * (double)states[2]) + (Kmpc[3] * (double)states[3]) + (Kmpc[4] * (double)states[4]) + (Kmpc[5] * (double)states[5]) + (Kmpc[6] * (double)states[6]))); // dU
 
   // limito la accion de control
   if (temp_ca > 5000)
@@ -95,12 +95,11 @@ ISR(TIMER1_OVF_vect)
     temp_ca = 0;
   }
 
-  set_pwm_duty_cycle((uint8_t)(((uint32_t)temp_ca * (uint32_t)100) / (uint32_t)20000));
+  u = (uint8_t)(((uint32_t)temp_ca * (uint32_t)100) / (uint32_t)5000);
 
-  // sprintf(debug_output, "dU: %ld, U: %ld, acc: %ld, DC: %d%% \r\n\tStates->(%ld,%ld,%ld,%ld,%ld,%ld,%ld)\r\n\r\n",
-  //         control_action_diff,
-  //         temp_ca,
-  //         temp_acc,
+  set_pwm_duty_cycle(u);
+
+  // sprintf(debug_output, "U: %d%% \r\n\tStates->(%ld,%ld,%ld,%ld,%ld,%ld,%ld)\r\n\r\n",
   //         u,
   //         states[0],
   //         states[1],
@@ -179,7 +178,7 @@ ISR(INT1_vect)
       reference = 1000;
       break;
     }
-    sprintf(debug_output, "button pressed\n\r");
+    sprintf(debug_output, "-> Referencia (%d) \n\r", reference);
     USART_putstring(debug_output);
   }
 }

@@ -160,9 +160,15 @@ ISR(INT1_vect)
     switch (reference)
     {
     case 1000:
+      reference = 1500;
+      break;
+    case 1500:
       reference = 2000;
       break;
     case 2000:
+      reference = 2500;
+      break;
+    case 2500:
       reference = 3000;
       break;
     case 3000:

@@ -24,6 +24,8 @@
 // las y[0] y u[0] son las actuales
 volatile float e[2] = {0};
 volatile float u[2] = {0};
+volatile float ref_prev = 0.0f;
+volatile float ref_filtered_prev = 0.0f;
 volatile float reference = 2.0f;
 char *debug_output = "test\n\r";
 
@@ -52,6 +54,7 @@ ISR(TIMER1_OVF_vect)
 {
   float temp_ca = 0.0f;
   float current_output = 0.0f;
+  float ref_filtered = 0.0f;
 
   // Lectura de la salida
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -59,13 +62,15 @@ ISR(TIMER1_OVF_vect)
   while (ADCSRA & (1 << ADSC))
   {
   };
-  // current_output = (float)((ADC * / 1024.0f);
-  // current_output = (float)(((4.88f * ADC) + 1) / 1000.0f);
   current_output = (ADC * VREF_ADC) / 1024.0f;
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  // calculo la referencia filtrada
+  ref_filtered = gains_re[1] * ref_prev + gains_re[0] * reference - gains_rs * ref_filtered_prev;
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   // CONTROL PID
-  temp_ca = gains_e[0] * (reference - current_output) + gains_e[1] * e[0] + gains_e[2] * e[1] - gains_u[0] * u[0] - gains_u[1] * u[1];
+  temp_ca = gains_e[0] * (ref_filtered - current_output) + gains_e[1] * e[0] + gains_e[2] * e[1] - gains_u[0] * u[0] - gains_u[1] * u[1];
   // temp_ca = 0.0f;
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -92,6 +97,9 @@ ISR(TIMER1_OVF_vect)
   e[0] = reference - current_output;
   u[1] = u[0];
   u[0] = temp_ca;
+
+  ref_prev = reference;
+  ref_filtered_prev = ref_filtered;
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   PORTB ^= (1 << PB4);

@@ -16,12 +16,14 @@
 #include <util/delay.h>
 
 #include "definitions.h"
-#include "uart.h"
+// #include "uart.h"
 #include "PID.h"
 
+#define VREF_ADC 5.0f // tensión de referencia del ADC
+
 // las y[0] y u[0] son las actuales
-volatile float y[3] = {0};
-volatile float u[3] = {0};
+volatile float e[2] = {0};
+volatile float u[2] = {0};
 volatile float reference = 2.0f;
 char *debug_output = "test\n\r";
 
@@ -30,12 +32,14 @@ int main(void)
   init_adc5();
   init_timer1();
   init_button_interrupt();
-  USART_init();
+  // USART_init();
   sei();
+
+  DDRB |= (1 << PB4);
 
   set_pwm_duty_cycle(0);
 
-  _delay_ms(100);
+  _delay_ms(5);
 
   while (1)
   {
@@ -43,6 +47,7 @@ int main(void)
   return 0;
 }
 
+// Dispara una interrupción cada 10ms
 ISR(TIMER1_OVF_vect)
 {
   float temp_ca = 0.0f;
@@ -54,12 +59,14 @@ ISR(TIMER1_OVF_vect)
   while (ADCSRA & (1 << ADSC))
   {
   };
-  current_output = (float)(ADC * 5.0f / 1023.0f);
+  // current_output = (float)((ADC * / 1024.0f);
+  // current_output = (float)(((4.88f * ADC) + 1) / 1000.0f);
+  current_output = (ADC * VREF_ADC) / 1024.0f;
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   // CONTROL PID
-  // temp_ca = gains_e[0] * (reference - current_output) + gains_e[1] * (reference - y[1]) + gains_e[2] * (reference - y[2]) - gains_u[0] * u[1] - gains_u[1] * u[2];
-  temp_ca = 0.0f;
+  temp_ca = gains_e[0] * (reference - current_output) + gains_e[1] * e[0] + gains_e[2] * e[1] - gains_u[0] * u[0] - gains_u[1] * u[1];
+  // temp_ca = 0.0f;
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   // limito la accion de control
@@ -75,19 +82,19 @@ ISR(TIMER1_OVF_vect)
   uint8_t ca = (uint8_t)((temp_ca * 100.0f) / 5.0f);
   set_pwm_duty_cycle(ca);
 
-  sprintf(debug_output, "y[0]=%d, temp_ca=%d, u=%d\n\r", (uint8_t)(current_output * 1000.0f), (uint8_t)(1000.0f * temp_ca), ca);
-  USART_putstring(debug_output);
+  // sprintf(debug_output, "y[0]=%d, temp_ca=%d, u=%d\n\r", (uint16_t)(current_output * 1000.0f), (uint8_t)(1000.0f * temp_ca), ca);
+  // USART_putstring(debug_output);
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   // actualizo las muestras pasadas
-  y[2] = y[1];
-  y[1] = current_output;
-  y[0] = current_output;
-  u[2] = u[1];
+  e[1] = e[0];
+  e[0] = reference - current_output;
   u[1] = u[0];
   u[0] = temp_ca;
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  PORTB ^= (1 << PB4);
 }
 
 // Dispara una interrupción cada 10ms
@@ -112,9 +119,12 @@ void set_pwm_duty_cycle(uint8_t duty_cycle)
 
 void init_adc5()
 {
-  ADMUX = (1 << REFS0);
-  ADMUX |= (1 << MUX2) | (1 << MUX0);
-  ADCSRA |= (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1);
+  ADMUX = (1 << REFS0) | (1 << MUX2) | (1 << MUX0);
+  ADCSRA = (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);
+
+  // ADMUX = (1 << REFS0);
+  // ADMUX |= (1 << MUX2) | (1 << MUX0);
+  // ADCSRA |= (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1);
 
   // se hace una lectura para finalizar el seteo del registro
   ADCSRA |= (1 << ADSC);
@@ -136,18 +146,23 @@ void init_button_interrupt()
 ISR(INT1_vect)
 {
   _delay_ms(100);
-  // if (!(PIND & (1 << PD3)))
-  // {
-  //   switch (reference)
-  //   {
-  //   case 1.0:
-  //     reference = 2.0;
-  //     break;
-  //   default:
-  //     reference = 1.0;
-  //     break;
-  //   }
-  //   sprintf(debug_output, "button pressed\n\r");
-  //   USART_putstring(debug_output);
-  // }
+  if (!(PIND & (1 << PD3)))
+  {
+    if (reference == 0.0f)
+    {
+      reference = 1.0f;
+    }
+    else if (reference == 2.0f)
+    {
+      reference = 3.5f;
+    }
+    else if (reference == 3.5f)
+    {
+      reference = 4.0f;
+    }
+    else
+    {
+      reference = 0.0f;
+    }
+  }
 }

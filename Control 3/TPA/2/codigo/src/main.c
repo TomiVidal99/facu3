@@ -26,7 +26,7 @@ volatile float e[2] = {0};
 volatile float u[2] = {0};
 volatile float ref_prev = 0.0f;
 volatile float ref_filtered_prev = 0.0f;
-volatile float reference = 2.0f;
+volatile float reference = 0.0f;
 char *debug_output = "test\n\r";
 
 int main(void)
